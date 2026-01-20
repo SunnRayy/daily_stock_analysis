@@ -978,47 +978,8 @@ class AkshareFetcher(BaseFetcher):
         except Exception as e:
             logger.error(f"[API Error] Fetch fund {stock_code} quote failed: {e}")
             return None
-            if row.empty:
-                logger.warning(f"[API返回] 未找到港股 {code} 的实时行情")
-                return None
             
-            row = row.iloc[0]
-            
-            # 安全获取字段值
-            def safe_float(val, default=0.0):
-                try:
-                    if pd.isna(val):
-                        return default
-                    return float(val)
-                except:
-                    return default
-            
-            # 港股行情数据构建
-            quote = RealtimeQuote(
-                code=stock_code,
-                name=str(row.get('名称', '')),
-                price=safe_float(row.get('最新价')),
-                change_pct=safe_float(row.get('涨跌幅')),
-                change_amount=safe_float(row.get('涨跌额')),
-                volume_ratio=safe_float(row.get('量比', 0)),  # 港股可能无量比
-                turnover_rate=safe_float(row.get('换手率', 0)),
-                amplitude=safe_float(row.get('振幅', 0)),
-                pe_ratio=safe_float(row.get('市盈率', 0)),  # 港股可能有市盈率
-                pb_ratio=safe_float(row.get('市净率', 0)),  # 港股可能有市净率
-                total_mv=safe_float(row.get('总市值', 0)),
-                circ_mv=safe_float(row.get('流通市值', 0)),
-                change_60d=0.0,  # 港股接口可能不提供
-                high_52w=safe_float(row.get('52周最高', 0)),
-                low_52w=safe_float(row.get('52周最低', 0)),
-            )
-            
-            logger.info(f"[港股实时行情] {stock_code} {quote.name}: 价格={quote.price}, 涨跌={quote.change_pct}%, "
-                       f"换手率={quote.turnover_rate}%")
-            return quote
-            
-        except Exception as e:
-            logger.error(f"[API错误] 获取港股 {stock_code} 实时行情失败: {e}")
-            return None
+
     
     def get_chip_distribution(self, stock_code: str) -> Optional[ChipDistribution]:
         """
