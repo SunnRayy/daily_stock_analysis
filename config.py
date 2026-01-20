@@ -102,6 +102,7 @@ class Config:
     # === 系统配置 ===
     max_workers: int = 3  # 低并发防封禁
     debug: bool = False
+    default_stock_type: str = "stock"  # 'stock' 或 'fund'
     
     # === 定时任务配置 ===
     schedule_enabled: bool = False            # 是否启用定时任务
@@ -222,6 +223,7 @@ class Config:
             webui_enabled=os.getenv('WEBUI_ENABLED', 'false').lower() == 'true',
             webui_host=os.getenv('WEBUI_HOST', '127.0.0.1'),
             webui_port=int(os.getenv('WEBUI_PORT', '8000')),
+            default_stock_type=os.getenv('DEFAULT_STOCK_TYPE', 'stock').lower(),
         )
     
     @classmethod

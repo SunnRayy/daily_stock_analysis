@@ -255,34 +255,36 @@ class DataFetcherManager:
         else:
             # 默认数据源将在首次使用时延迟加载
             self._init_default_fetchers()
-    
+            
     def _init_default_fetchers(self) -> None:
         """
         初始化默认数据源列表
-        
-        按优先级排序：
-        0. EfinanceFetcher (Priority 0) - 最高优先级
-        1. AkshareFetcher (Priority 1)
-        2. TushareFetcher (Priority 2)
-        3. BaostockFetcher (Priority 3)
-        4. YfinanceFetcher (Priority 4)
         """
         from .efinance_fetcher import EfinanceFetcher
         from .akshare_fetcher import AkshareFetcher
         from .tushare_fetcher import TushareFetcher
         from .baostock_fetcher import BaostockFetcher
         from .yfinance_fetcher import YfinanceFetcher
+        from config import get_config
         
-        self._fetchers = [
-            EfinanceFetcher(),   # 最高优先级
-            AkshareFetcher(),
-            TushareFetcher(),
-            BaostockFetcher(),
-            YfinanceFetcher(),
-        ]
+        config = get_config()
         
-        # 按优先级排序
-        self._fetchers.sort(key=lambda f: f.priority)
+        if config.default_stock_type == 'fund':
+            # 基金模式：仅使用 AkshareFetcher (目前仅它实现了开放式基金支持)
+            self._fetchers = [
+                AkshareFetcher(),
+            ]
+            logger.info(f"基金模式: 仅启用 AkshareFetcher")
+        else:
+            # 股票模式：正常优先级
+            self._fetchers = [
+                EfinanceFetcher(),   # Priority 0
+                AkshareFetcher(),    # Priority 1
+                TushareFetcher(),
+                BaostockFetcher(),
+                YfinanceFetcher(),
+            ]
+            self._fetchers.sort(key=lambda f: f.priority)
         
         logger.info(f"已初始化 {len(self._fetchers)} 个数据源: " + 
                    ", ".join([f.name for f in self._fetchers]))

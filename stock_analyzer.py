@@ -282,6 +282,12 @@ class StockTrendAnalyzer:
         """
         if len(df) < 5:
             return
+            
+        # Check if volume is all zero (funds)
+        if df['volume'].sum() == 0:
+            result.volume_status = VolumeStatus.NORMAL
+            result.volume_trend = "基金无量能数据"
+            return
         
         latest = df.iloc[-1]
         vol_5d_avg = df['volume'].iloc[-6:-1].mean()

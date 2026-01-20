@@ -35,6 +35,7 @@ from tenacity import (
 )
 
 from .base import BaseFetcher, DataFetchError, RateLimitError, STANDARD_COLUMNS
+from config import get_config
 
 
 @dataclass
@@ -330,6 +331,11 @@ class AkshareFetcher(BaseFetcher):
         elif _is_etf_code(stock_code):
             return self._fetch_etf_data(stock_code, start_date, end_date)
         else:
+            # Check for generic fund mode
+            config = get_config()
+            if config.default_stock_type == 'fund':
+                return self._fetch_open_fund_data(stock_code, start_date, end_date)
+            
             return self._fetch_stock_data(stock_code, start_date, end_date)
     
     def _fetch_stock_data(self, stock_code: str, start_date: str, end_date: str) -> pd.DataFrame:
@@ -511,6 +517,70 @@ class AkshareFetcher(BaseFetcher):
                 raise RateLimitError(f"Akshare 可能被限流: {e}") from e
             
             raise DataFetchError(f"Akshare 获取港股数据失败: {e}") from e
+
+    def _fetch_open_fund_data(self, stock_code: str, start_date: str, end_date: str) -> pd.DataFrame:
+        """
+        Fetch open-ended fund history data
+        Source: ak.fund_open_fund_info_em
+        """
+        import akshare as ak
+        
+        self._set_random_user_agent()
+        self._enforce_rate_limit()
+        
+        logger.info(f"[API Call] ak.fund_open_fund_info_em(symbol={stock_code}, indicator='单位净值走势')")
+        
+        try:
+            import time as _time
+            api_start = _time.time()
+            
+            df = ak.fund_open_fund_info_em(symbol=stock_code, indicator="单位净值走势")
+            
+            api_elapsed = _time.time() - api_start
+            
+            if df is not None and not df.empty:
+                logger.info(f"[API Return] ak.fund_open_fund_info_em success: {len(df)} rows, {api_elapsed:.2f}s")
+                
+                # Normalize columns
+                # Columns: 净值日期, 单位净值, 日增长率
+                df = df.rename(columns={
+                    '净值日期': 'date',
+                    '单位净值': 'close', 
+                    '日增长率': 'pct_chg'
+                })
+                
+                # Convert date
+                df['date'] = pd.to_datetime(df['date'])
+                
+                # Filter by date range
+                start_dt = pd.to_datetime(start_date)
+                end_dt = pd.to_datetime(end_date)
+                df = df[(df['date'] >= start_dt) & (df['date'] <= end_dt)]
+                
+                if df.empty:
+                     logger.warning(f"[Data] Fund {stock_code} has no data in range {start_date} - {end_date}")
+                     return df
+
+                # Fill other standard columns
+                df['open'] = df['close']
+                df['high'] = df['close'] 
+                df['low'] = df['close']
+                df['volume'] = 0.0
+                df['amount'] = 0.0
+                
+                # Reorder to standard columns if possible, but _normalize_data will handle it too
+                # Just ensuring fields exist
+                
+            else:
+                 logger.warning(f"[API Return] ak.fund_open_fund_info_em returned empty")
+
+            return df
+
+        except Exception as e:
+            error_msg = str(e).lower()
+            if any(keyword in error_msg for keyword in ['banned', 'blocked', '频率', 'rate', '限制']):
+                raise RateLimitError(f"Akshare rate limited: {e}") from e
+            raise DataFetchError(f"Akshare fetch fund failed: {e}") from e
     
     def _normalize_data(self, df: pd.DataFrame, stock_code: str) -> pd.DataFrame:
         """
@@ -569,6 +639,10 @@ class AkshareFetcher(BaseFetcher):
         elif _is_etf_code(stock_code):
             return self._get_etf_realtime_quote(stock_code)
         else:
+            # Check for generic fund mode
+            config = get_config()
+            if config.default_stock_type == 'fund':
+                return self._get_open_fund_realtime_quote(stock_code)
             return self._get_stock_realtime_quote(stock_code)
     
     def _get_stock_realtime_quote(self, stock_code: str) -> Optional[RealtimeQuote]:
@@ -798,6 +872,112 @@ class AkshareFetcher(BaseFetcher):
             
             # 查找指定港股
             row = df[df['代码'] == code]
+            if row.empty:
+                logger.warning(f"[API返回] 未找到港股 {stock_code} 的实时行情")
+                return None
+            
+            row = row.iloc[0]
+            
+            # 安全获取字段值
+            def safe_float(val, default=0.0):
+                try:
+                    if pd.isna(val):
+                        return default
+                    return float(val)
+                except:
+                    return default
+            
+            quote = RealtimeQuote(
+                code=stock_code,
+                name=str(row.get('名称', '')),
+                price=safe_float(row.get('最新价')),
+                change_pct=safe_float(row.get('涨跌幅')),
+                change_amount=safe_float(row.get('涨跌额')),
+                volume_ratio=safe_float(row.get('量比', 0)),
+                turnover_rate=safe_float(row.get('换手率', 0)),
+                amplitude=safe_float(row.get('振幅', 0)),
+                pe_ratio=safe_float(row.get('市盈率-动态', 0)),
+                pb_ratio=safe_float(row.get('市净率', 0)),
+                total_mv=safe_float(row.get('总市值', 0)),
+                circ_mv=safe_float(row.get('流通市值', 0)),
+                change_60d=0.0,
+                high_52w=safe_float(row.get('52周最高', 0)),
+                low_52w=safe_float(row.get('52周最低', 0)),
+            )
+            
+            logger.info(f"[港股实时行情] {stock_code} {quote.name}: 价格={quote.price}, 涨跌={quote.change_pct}%")
+            return quote
+            
+        except Exception as e:
+            logger.error(f"[API错误] 获取港股 {stock_code} 实时行情失败: {e}")
+            return None
+
+    def _get_open_fund_realtime_quote(self, stock_code: str) -> Optional[RealtimeQuote]:
+        """
+        Fetch open-ended fund realtime quote (latest NAV)
+        
+        Note: Open funds don't have true realtime quotes, using latest NAV.
+        
+        Source: 
+        - Name: ak.fund_individual_basic_info_xq
+        - Price: ak.fund_open_fund_info_em (latest item)
+        """
+        import akshare as ak
+        
+        try:
+            # 1. Get Fund Name
+            self._set_random_user_agent()
+            self._enforce_rate_limit()
+            
+            name = f"基金{stock_code}"
+            try:
+                info_df = ak.fund_individual_basic_info_xq(symbol=stock_code)
+                # DataFrame with 'item' and 'value' columns
+                name_row = info_df[info_df['item'] == '基金名称']
+                if not name_row.empty:
+                    name = name_row.iloc[0]['value']
+            except Exception as e:
+                logger.warning(f"Failed to fetch fund name for {stock_code}: {e}")
+
+            # 2. Get Latest NAV
+            self._set_random_user_agent()
+            self._enforce_rate_limit()
+            
+            nav_df = ak.fund_open_fund_info_em(symbol=stock_code, indicator="单位净值走势")
+            if nav_df is None or nav_df.empty:
+                logger.warning(f"No NAV data for fund {stock_code}")
+                return None
+                
+            # Columns: 净值日期, 单位净值, 日增长率
+            latest = nav_df.iloc[-1]
+            price = float(latest['单位净值'])
+            change_pct = float(latest['日增长率'])
+            date = latest['净值日期']
+            
+            quote = RealtimeQuote(
+                code=stock_code,
+                name=name,
+                price=price,
+                change_pct=change_pct,
+                change_amount=0.0, # Not provided directly
+                volume_ratio=0.0,
+                turnover_rate=0.0,
+                amplitude=0.0,
+                pe_ratio=0.0,
+                pb_ratio=0.0,
+                total_mv=0.0,
+                circ_mv=0.0,
+                change_60d=0.0,
+                high_52w=0.0,
+                low_52w=0.0
+            )
+            
+            logger.info(f"[基金行情] {stock_code} {quote.name} ({date}): 净值={quote.price}, 日增长={quote.change_pct}%")
+            return quote
+
+        except Exception as e:
+            logger.error(f"[API Error] Fetch fund {stock_code} quote failed: {e}")
+            return None
             if row.empty:
                 logger.warning(f"[API返回] 未找到港股 {code} 的实时行情")
                 return None
