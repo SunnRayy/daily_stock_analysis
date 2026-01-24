@@ -25,6 +25,7 @@ from typing import Dict, Any, TYPE_CHECKING
 
 from web.services import get_config_service, get_analysis_service
 from web.templates import render_config_page
+from enums import ReportType
 
 if TYPE_CHECKING:
     from http.server import BaseHTTPRequestHandler
@@ -182,9 +183,13 @@ class ApiHandler:
                 status=HTTPStatus.BAD_REQUEST
             )
         
+        # 获取报告类型参数（默认精简报告）
+        report_type_str = query.get("report_type", ["simple"])[0]
+        report_type = ReportType.from_str(report_type_str)
+        
         # 提交异步分析任务
         try:
-            result = self.analysis_service.submit_analysis(code)
+            result = self.analysis_service.submit_analysis(code, report_type=report_type)
             return JsonResponse(result)
         except Exception as e:
             logger.error(f"[ApiHandler] 提交分析任务失败: {e}")
@@ -242,11 +247,63 @@ class ApiHandler:
 
 
 # ============================================================
+# Bot Webhook 处理器
+# ============================================================
+
+class BotHandler:
+    """
+    机器人 Webhook 处理器
+    
+    处理各平台的机器人回调请求。
+    """
+    
+    def handle_webhook(self, platform: str, form_data: Dict[str, list], headers: Dict[str, str], body: bytes) -> Response:
+        """
+        处理 Webhook 请求
+        
+        Args:
+            platform: 平台名称 (feishu, dingtalk, wecom, telegram)
+            form_data: POST 数据（已解析）
+            headers: HTTP 请求头
+            body: 原始请求体
+            
+        Returns:
+            Response 对象
+        """
+        try:
+            from bot.handler import handle_webhook
+            from bot.models import WebhookResponse
+            
+            # 调用 bot 模块处理
+            webhook_response = handle_webhook(platform, headers, body)
+            
+            # 转换为 web 响应
+            return JsonResponse(
+                webhook_response.body,
+                status=HTTPStatus(webhook_response.status_code)
+            )
+            
+        except ImportError as e:
+            logger.error(f"[BotHandler] Bot 模块未正确安装: {e}")
+            return JsonResponse(
+                {"error": "Bot module not available"},
+                status=HTTPStatus.INTERNAL_SERVER_ERROR
+            )
+        except Exception as e:
+            logger.error(f"[BotHandler] 处理 {platform} Webhook 失败: {e}")
+            return JsonResponse(
+                {"error": str(e)},
+                status=HTTPStatus.INTERNAL_SERVER_ERROR
+            )
+
+
+# ============================================================
 # 处理器工厂
 # ============================================================
 
 _page_handler: PageHandler | None = None
 _api_handler: ApiHandler | None = None
+_bot_handler: BotHandler | None = None
 
 
 def get_page_handler() -> PageHandler:
@@ -263,3 +320,11 @@ def get_api_handler() -> ApiHandler:
     if _api_handler is None:
         _api_handler = ApiHandler()
     return _api_handler
+
+
+def get_bot_handler() -> BotHandler:
+    """获取 Bot 处理器实例"""
+    global _bot_handler
+    if _bot_handler is None:
+        _bot_handler = BotHandler()
+    return _bot_handler

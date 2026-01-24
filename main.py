@@ -47,7 +47,9 @@ from data_provider import DataFetcherManager
 from data_provider.akshare_fetcher import AkshareFetcher, RealtimeQuote, ChipDistribution
 from analyzer import GeminiAnalyzer, AnalysisResult, STOCK_NAME_MAP
 from notification import NotificationService, NotificationChannel, send_daily_report
+from bot.models import BotMessage
 from search_service import SearchService, SearchResponse
+from enums import ReportType
 from stock_analyzer import StockTrendAnalyzer, TrendAnalysisResult
 from market_analyzer import MarketAnalyzer
 
@@ -134,7 +136,8 @@ class StockAnalysisPipeline:
     def __init__(
         self,
         config: Optional[Config] = None,
-        max_workers: Optional[int] = None
+        max_workers: Optional[int] = None,
+        source_message: Optional[BotMessage] = None
     ):
         """
         初始化调度器
@@ -145,6 +148,7 @@ class StockAnalysisPipeline:
         """
         self.config = config or get_config()
         self.max_workers = max_workers or self.config.max_workers
+        self.source_message = source_message
         
         # 初始化各模块
         self.db = get_db()
@@ -152,7 +156,7 @@ class StockAnalysisPipeline:
         self.akshare_fetcher = AkshareFetcher()  # 用于获取增强数据（量比、筹码等）
         self.trend_analyzer = StockTrendAnalyzer()  # 趋势分析器
         self.analyzer = GeminiAnalyzer()
-        self.notifier = NotificationService()
+        self.notifier = NotificationService(source_message=source_message)
         
         # 初始化搜索服务
         self.search_service = SearchService(
@@ -424,9 +428,10 @@ class StockAnalysisPipeline:
     
     def process_single_stock(
         self, 
-        code: str,
+        code: str, 
         skip_analysis: bool = False,
-        single_stock_notify: bool = False
+        single_stock_notify: bool = False,
+        report_type: ReportType = ReportType.SIMPLE
     ) -> Optional[AnalysisResult]:
         """
         处理单只股票的完整流程
@@ -443,6 +448,7 @@ class StockAnalysisPipeline:
             code: 股票代码
             skip_analysis: 是否跳过 AI 分析
             single_stock_notify: 是否启用单股推送模式（每分析完一只立即推送）
+            report_type: 报告类型枚举
             
         Returns:
             AnalysisResult 或 None
@@ -473,8 +479,17 @@ class StockAnalysisPipeline:
                 # 单股推送模式（#55）：每分析完一只股票立即推送
                 if single_stock_notify and self.notifier.is_available():
                     try:
-                        single_report = self.notifier.generate_single_stock_report(result)
-                        if self.notifier.send(single_report):
+                        # 根据报告类型选择生成方法
+                        if report_type == ReportType.FULL:
+                            # 完整报告：使用决策仪表盘格式
+                            report_content = self.notifier.generate_dashboard_report([result])
+                            logger.info(f"[{code}] 使用完整报告格式")
+                        else:
+                            # 精简报告：使用单股报告格式（默认）
+                            report_content = self.notifier.generate_single_stock_report(result)
+                            logger.info(f"[{code}] 使用精简报告格式")
+                        
+                        if self.notifier.send(report_content):
                             logger.info(f"[{code}] 单股推送成功")
                         else:
                             logger.warning(f"[{code}] 单股推送失败")
@@ -610,6 +625,7 @@ class StockAnalysisPipeline:
             # 推送通知
             if self.notifier.is_available():
                 channels = self.notifier.get_available_channels()
+                context_success = self.notifier.send_to_context(report)
 
                 # 企业微信：只发精简版（平台限制）
                 wechat_success = False
@@ -635,7 +651,7 @@ class StockAnalysisPipeline:
                     else:
                         logger.warning(f"未知通知渠道: {channel}")
 
-                success = wechat_success or non_wechat_success
+                success = wechat_success or non_wechat_success or context_success
                 if success:
                     logger.info("决策仪表盘推送成功")
                 else:
@@ -877,6 +893,39 @@ def run_full_analysis(
         logger.exception(f"分析流程执行失败: {e}")
 
 
+def start_bot_stream_clients(config: Config) -> None:
+    """Start bot stream clients when enabled in config."""
+    # 启动钉钉 Stream 客户端
+    if config.dingtalk_stream_enabled:
+        try:
+            from bot.platforms import start_dingtalk_stream_background, DINGTALK_STREAM_AVAILABLE
+            if DINGTALK_STREAM_AVAILABLE:
+                if start_dingtalk_stream_background():
+                    logger.info("[Main] Dingtalk Stream client started in background.")
+                else:
+                    logger.warning("[Main] Dingtalk Stream client failed to start.")
+            else:
+                logger.warning("[Main] Dingtalk Stream enabled but SDK is missing.")
+                logger.warning("[Main] Run: pip install dingtalk-stream")
+        except Exception as exc:
+            logger.error(f"[Main] Failed to start Dingtalk Stream client: {exc}")
+
+    # 启动飞书 Stream 客户端
+    if getattr(config, 'feishu_stream_enabled', False):
+        try:
+            from bot.platforms import start_feishu_stream_background, FEISHU_SDK_AVAILABLE
+            if FEISHU_SDK_AVAILABLE:
+                if start_feishu_stream_background():
+                    logger.info("[Main] Feishu Stream client started in background.")
+                else:
+                    logger.warning("[Main] Feishu Stream client failed to start.")
+            else:
+                logger.warning("[Main] Feishu Stream enabled but SDK is missing.")
+                logger.warning("[Main] Run: pip install lark-oapi")
+        except Exception as exc:
+            logger.error(f"[Main] Failed to start Feishu Stream client: {exc}")
+
+
 def main() -> int:
     """
     主入口函数
@@ -917,6 +966,7 @@ def main() -> int:
         try:
             from webui import run_server_in_thread
             run_server_in_thread(host=config.webui_host, port=config.webui_port)
+            start_bot_stream_clients(config)
         except Exception as e:
             logger.error(f"启动 WebUI 失败: {e}")
     
