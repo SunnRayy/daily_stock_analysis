@@ -168,7 +168,18 @@ class YfinanceFetcher(BaseFetcher):
         date, open, high, low, close, volume, amount, pct_chg
         """
         df = df.copy()
-        
+
+        # Handle Yfinance MultiIndex columns (common in new versions)
+        # Move this to the top to ensure clean column names before any operations
+        if isinstance(df.columns, pd.MultiIndex):
+            # Drop the ticker level (usually level 1) to get flat ['Open', 'High', ...]
+            try:
+                df.columns = df.columns.get_level_values(0)
+                # Deduplicate columns if any (crucial fix for some yfinance versions)
+                df = df.loc[:, ~df.columns.duplicated()]
+            except Exception as e:
+                logger.warning(f"Failed to flatten MultiIndex columns: {e}")
+
         # 重置索引，将日期从索引变为列
         df = df.reset_index()
         
