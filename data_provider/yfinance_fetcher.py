@@ -60,27 +60,35 @@ class YfinanceFetcher(BaseFetcher):
     def _convert_stock_code(self, stock_code: str) -> str:
         """
         转换股票代码为 Yahoo Finance 格式
-        
-        Yahoo Finance A 股代码格式：
+
+        Yahoo Finance 格式：
+        - US stocks: AAPL, NVDA, BRK.B (no suffix)
         - 沪市：600519.SS (Shanghai Stock Exchange)
         - 深市：000001.SZ (Shenzhen Stock Exchange)
-        
+
         Args:
-            stock_code: 原始代码，如 '600519', '000001'
-            
+            stock_code: 原始代码，如 '600519', '000001', 'AAPL'
+
         Returns:
-            Yahoo Finance 格式代码，如 '600519.SS', '000001.SZ'
+            Yahoo Finance 格式代码
         """
+        import re
+
         code = stock_code.strip()
-        
-        # 已经包含后缀的情况
+
+        # Already has exchange suffix - return as-is
         if '.SS' in code.upper() or '.SZ' in code.upper():
             return code.upper()
-        
+
+        # US stock pattern: 1-5 uppercase letters, optional .X suffix
+        # Examples: AAPL, NVDA, BRK.B, A
+        if re.match(r'^[A-Za-z]{1,5}(\.[A-Za-z])?$', code):
+            return code.upper()  # US stock, no suffix needed
+
         # 去除可能的后缀
         code = code.replace('.SH', '').replace('.sh', '')
-        
-        # 根据代码前缀判断市场
+
+        # CN stock: 6 digits, add exchange suffix
         if code.startswith(('600', '601', '603', '688')):
             return f"{code}.SS"
         elif code.startswith(('000', '002', '300')):
@@ -144,7 +152,15 @@ class YfinanceFetcher(BaseFetcher):
         date, open, high, low, close, volume, amount, pct_chg
         """
         df = df.copy()
-        
+
+        # Handle Yfinance MultiIndex columns (common in new versions)
+        if isinstance(df.columns, pd.MultiIndex):
+            # Drop the ticker level (usually level 1) to get flat ['Open', 'High', ...]
+            try:
+                df.columns = df.columns.get_level_values(0)
+            except Exception as e:
+                logger.warning(f"Failed to flatten MultiIndex columns: {e}")
+
         # 重置索引，将日期从索引变为列
         df = df.reset_index()
         

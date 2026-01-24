@@ -265,19 +265,24 @@ class DataFetcherManager:
         from .tushare_fetcher import TushareFetcher
         from .baostock_fetcher import BaostockFetcher
         from .yfinance_fetcher import YfinanceFetcher
+        from .finnhub_fetcher import FinnhubFetcher
         from config import get_config
         
         config = get_config()
         
         if config.default_stock_type == 'fund':
-            # 基金模式：仅使用 AkshareFetcher (目前仅它实现了开放式基金支持)
+            # 基金模式：主要使用 AkshareFetcher，但增加 US Stock 支持
             self._fetchers = [
-                AkshareFetcher(),
+                FinnhubFetcher(),    # Priority 1 (US Stocks)
+                AkshareFetcher(),    # Priority 1 (Funds)
+                YfinanceFetcher(),   # Priority 4 (Fallback)
             ]
-            logger.info(f"基金模式: 仅启用 AkshareFetcher")
+            self._fetchers.sort(key=lambda f: f.priority)
+            logger.info(f"基金模式: 启用 AkshareFetcher (基金) + Finnhub/Yfinance (美股)")
         else:
             # 股票模式：正常优先级
             self._fetchers = [
+                FinnhubFetcher(),    # Priority 1 (US Stocks)
                 EfinanceFetcher(),   # Priority 0
                 AkshareFetcher(),    # Priority 1
                 TushareFetcher(),

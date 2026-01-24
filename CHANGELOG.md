@@ -8,11 +8,21 @@
 ## [Unreleased]
 
 ### 计划中
+
 - Web 管理界面
+
+### 新增
+
+- 🇺🇸 美股数据支持 (2026-01-24)
+  - 新增 `FinnhubFetcher` (Priority 1) 和 `YfinanceFetcher` (Priority 4) 美股支持
+  - 支持直接查询美股代码（如 `AAPL`, `GOOGL`, `NVDA`）
+  - 自动故障切换：Finnhub -> Yfinance
+  - 兼容基金模式（Fund Mode 下也可查询美股）
 
 ## [1.6.0] - 2026-01-19
 
 ### 新增
+
 - 🖥️ WebUI 管理界面及 API 支持（PR #72）
   - 全新 Web 架构：分层设计（Server/Router/Handler/Service）
   - 核心 API：支持 `/analysis` (触发分析), `/tasks` (查询进度), `/health` (健康检查)
@@ -24,6 +34,7 @@
   - 保持对 Secrets 的向下兼容
 
 ### 修复
+
 - 🐛 修复企业微信/飞书报告截断问题（[#73](https://github.com/ZhuLinsen/daily_stock_analysis/issues/73)）
   - 移除 notification.py 中不必要的长度硬截断逻辑
   - 依赖底层自动分片机制处理长消息
@@ -33,6 +44,7 @@
 ## [1.5.0] - 2026-01-17
 
 ### 新增
+
 - 📲 单股推送模式（[#55](https://github.com/ZhuLinsen/daily_stock_analysis/issues/55)）
   - 每分析完一只股票立即推送，不用等全部分析完
   - 命令行参数：`--single-notify`
@@ -44,6 +56,7 @@
 ## [1.4.0] - 2026-01-17
 
 ### 新增
+
 - 📱 Pushover 推送支持（PR #26）
   - 支持 iOS/Android 跨平台推送
   - 通过 `PUSHOVER_USER_KEY` 和 `PUSHOVER_API_TOKEN` 配置
@@ -56,6 +69,7 @@
   - 支持 5 位代码或 HK 前缀（如 `hk00700`、`hk1810`）
 
 ### 修复
+
 - 🔧 飞书 Markdown 渲染优化（PR #34）
   - 使用交互卡片和格式化器修复渲染问题
 - ♻️ 股票列表热重载（PR #42 修复）
@@ -66,13 +80,14 @@
   - 添加失败缓存，避免重复请求失败接口
 
 ### 改进
+
 - 📝 README 精简优化
   - 高级配置移至 `docs/full-guide.md`
-
 
 ## [1.3.0] - 2026-01-12
 
 ### 新增
+
 - 🔗 自定义 Webhook 支持
   - 支持任意 POST JSON 的 Webhook 端点
   - 自动识别钉钉、Discord、Slack、Bark 等常见服务格式
@@ -80,6 +95,7 @@
   - 通过 `CUSTOM_WEBHOOK_URLS` 环境变量配置
 
 ### 修复
+
 - 📝 企业微信长消息分批发送
   - 解决自选股过多时内容超过 4096 字符限制导致推送失败的问题
   - 智能按股票分析块分割，每批添加分页标记（如 1/3, 2/3）
@@ -88,6 +104,7 @@
 ## [1.2.0] - 2026-01-11
 
 ### 新增
+
 - 📢 多渠道推送支持
   - 企业微信 Webhook
   - 飞书 Webhook（新增）
@@ -95,12 +112,14 @@
   - 自动识别渠道类型，配置更简单
 
 ### 改进
+
 - 统一使用 `NOTIFICATION_URL` 配置，兼容旧的 `WECHAT_WEBHOOK_URL`
 - 邮件支持 Markdown 转 HTML 渲染
 
 ## [1.1.0] - 2026-01-11
 
 ### 新增
+
 - 🤖 OpenAI 兼容 API 支持
   - 支持 DeepSeek、通义千问、Moonshot、智谱 GLM 等
   - Gemini 和 OpenAI 格式二选一
@@ -109,6 +128,7 @@
 ## [1.0.0] - 2026-01-10
 
 ### 新增
+
 - 🎯 AI 决策仪表盘分析
   - 一句话核心结论
   - 精确买入/止损/目标点位
@@ -133,6 +153,7 @@
 - 🚀 GitHub Actions 零成本部署
 
 ### 技术特性
+
 - Gemini AI 模型（gemini-3-flash-preview）
 - 429 限流自动重试 + 模型切换
 - 请求间延时防封禁

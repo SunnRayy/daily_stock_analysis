@@ -13,8 +13,10 @@
 ## ✨ 功能特性
 
 ### 🎯 核心功能
+
 - **AI 决策仪表盘** - 一句话核心结论 + 精确买卖点位 + 检查清单
 - **多维度分析** - 技术面 + 筹码分布 + 舆情情报 + 实时行情
+- **🇺🇸 美股支持** - 支持 AAPL, NVDA, GOOGL 等美股分析 (Finnhub/Yfinance)
 - **大盘复盘** - 每日市场概览、板块涨跌、北向资金
 - **多渠道推送** - 支持企业微信、飞书、Telegram、邮件（自动识别）
 - **零成本部署** - GitHub Actions 免费运行，无需服务器
@@ -22,13 +24,15 @@
 - **🔄 多模型支持** - 支持 OpenAI 兼容 API（DeepSeek、通义千问等）作为备选
 
 ### 📊 数据来源
-- **行情数据**: AkShare（免费）、Tushare、Baostock、YFinance
+
+- **行情数据**: AkShare（免费）、Finnhub (美股)、YFinance (全球)、Tushare、Baostock
 - **新闻搜索**: Tavily、SerpAPI、Bocha
-- **AI 分析**: 
+- **AI 分析**:
   - 主力：Google Gemini（gemini-3-flash-preview）—— [免费获取](https://aistudio.google.com/)
   - 备选：应大家要求，也支持了OpenAI 兼容 API（DeepSeek、通义千问、Moonshot 等）
 
 ### 🛡️ 交易理念内置
+
 - ❌ **严禁追高** - 乖离率 > 5% 自动标记「危险」
 - ✅ **趋势交易** - MA5 > MA10 > MA20 多头排列
 - 📍 **精确点位** - 买入价、止损价、目标价
@@ -96,7 +100,7 @@
 
 `Actions` → `每日股票分析` → `Run workflow` → 选择模式 → `Run workflow`
 
-#### 5. 完成！
+#### 5. 完成
 
 默认每个工作日 **18:00（北京时间）** 自动执行
 
@@ -107,6 +111,7 @@
 ## 📱 推送效果
 
 ### 决策仪表盘
+
 ```
 📊 2026-01-10 决策仪表盘
 3只股票 | 🟢买入:1 🟡观望:2 🔴卖出:0
@@ -212,6 +217,7 @@ daily_stock_analysis/
 > 📢 以下功能将视后续情况逐步完成，如果你有好的想法或建议，欢迎 [提交 Issue](https://github.com/ZhuLinsen/daily_stock_analysis/issues) 讨论！
 
 ### 🔔 通知渠道扩展
+
 - [x] 企业微信机器人
 - [x] 飞书机器人
 - [x] Telegram Bot
@@ -219,18 +225,22 @@ daily_stock_analysis/
 - [x] 自定义 Webhook（支持钉钉、Discord、Slack、Bark 等）
 - [x] iOS/Android 推送（Pushover）
 - [x] 钉钉机器人 （已支持命令交互 >> [相关配置](docs/bot/dingding-bot-config.md)）
+
 ### 🤖 AI 模型支持
+
 - [x] Google Gemini（主力，免费额度）
 - [x] OpenAI 兼容 API（支持 GPT-4/DeepSeek/通义千问/Claude/文心一言 等）
 - [x] 本地模型（Ollama）
 
 ### 📊 数据源扩展
+
 - [x] AkShare（免费）
 - [x] Tushare Pro
 - [x] Baostock
 - [x] YFinance
 
 ### 🎯 功能增强
+
 - [x] 决策仪表盘
 - [x] 大盘复盘
 - [x] 定时推送
@@ -238,7 +248,7 @@ daily_stock_analysis/
 - [x] 港股支持
 - [x] Web 管理界面 (简易版)
 - [ ] 历史分析回测
-- [ ] 美股支持
+- [x] 美股支持 (Finnhub/Yfinance)
 
 ## 🤝 贡献
 
@@ -247,6 +257,7 @@ daily_stock_analysis/
 详见 [贡献指南](CONTRIBUTING.md)
 
 ## 📄 License
+
 [MIT License](LICENSE) © 2026 ZhuLinsen
 
 如果你在项目中使用或基于本项目进行二次开发，
@@ -254,6 +265,7 @@ daily_stock_analysis/
 这将有助于项目的持续维护和社区发展。
 
 ## 📬 联系与合作
+
 - GitHub Issues：[提交 Issue](https://github.com/ZhuLinsen/daily_stock_analysis/issues)
 
 ## ⭐ Star History
@@ -276,8 +288,10 @@ daily_stock_analysis/
 
 <!-- 赞赏锚点 -->
 <a id="sponsor"></a>
+
 ###### ☕ 请我喝杯咖啡
-- 如果觉得本项目对你有帮助且行有余力，可以请我喝杯咖啡，支持项目的持续维护与迭代；不赞赏也完全不影响使用。   
+
+- 如果觉得本项目对你有帮助且行有余力，可以请我喝杯咖啡，支持项目的持续维护与迭代；不赞赏也完全不影响使用。
 <small>（赞赏时可备注联系方式，方便私信致谢与后续交流反馈）</small>
 - 感谢支持, 祝您股市长虹，拿主力当提款机。
 
