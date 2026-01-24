@@ -61,34 +61,50 @@ class YfinanceFetcher(BaseFetcher):
         """
         转换股票代码为 Yahoo Finance 格式
 
-        Yahoo Finance 格式：
-        - US stocks: AAPL, NVDA, BRK.B (no suffix)
-        - 沪市：600519.SS (Shanghai Stock Exchange)
-        - 深市：000001.SZ (Shenzhen Stock Exchange)
+        Yahoo Finance 代码格式：
+        - A股沪市：600519.SS (Shanghai Stock Exchange)
+        - A股深市：000001.SZ (Shenzhen Stock Exchange)
+        - 港股：0700.HK (Hong Kong Stock Exchange)
+        - 美股：AAPL, TSLA, GOOGL (无需后缀)
 
         Args:
-            stock_code: 原始代码，如 '600519', '000001', 'AAPL'
+            stock_code: 原始代码，如 '600519', 'hk00700', 'AAPL'
 
         Returns:
             Yahoo Finance 格式代码
+
+        Examples:
+            >>> fetcher._convert_stock_code('600519')
+            '600519.SS'
+            >>> fetcher._convert_stock_code('hk00700')
+            '0700.HK'
+            >>> fetcher._convert_stock_code('AAPL')
+            'AAPL'
         """
         import re
 
-        code = stock_code.strip()
+        code = stock_code.strip().upper()
 
-        # Already has exchange suffix - return as-is
-        if '.SS' in code.upper() or '.SZ' in code.upper():
-            return code.upper()
+        # 美股：1-5个大写字母（可能包含 .），直接返回
+        if re.match(r'^[A-Z]{1,5}(\.[A-Z])?$', code):
+            logger.debug(f"识别为美股代码: {code}")
+            return code
 
-        # US stock pattern: 1-5 uppercase letters, optional .X suffix
-        # Examples: AAPL, NVDA, BRK.B, A
-        if re.match(r'^[A-Za-z]{1,5}(\.[A-Za-z])?$', code):
-            return code.upper()  # US stock, no suffix needed
+        # 港股：hk前缀 -> .HK后缀
+        if code.startswith('HK'):
+            hk_code = code[2:].lstrip('0') or '0'  # 去除前导0，但保留至少一个0
+            hk_code = hk_code.zfill(4)  # 补齐到4位
+            logger.debug(f"转换港股代码: {stock_code} -> {hk_code}.HK")
+            return f"{hk_code}.HK"
 
-        # 去除可能的后缀
-        code = code.replace('.SH', '').replace('.sh', '')
+        # 已经包含后缀的情况
+        if '.SS' in code or '.SZ' in code or '.HK' in code:
+            return code
 
-        # CN stock: 6 digits, add exchange suffix
+        # 去除可能的 .SH 后缀
+        code = code.replace('.SH', '')
+
+        # A股：根据代码前缀判断市场
         if code.startswith(('600', '601', '603', '688')):
             return f"{code}.SS"
         elif code.startswith(('000', '002', '300')):
@@ -152,15 +168,7 @@ class YfinanceFetcher(BaseFetcher):
         date, open, high, low, close, volume, amount, pct_chg
         """
         df = df.copy()
-
-        # Handle Yfinance MultiIndex columns (common in new versions)
-        if isinstance(df.columns, pd.MultiIndex):
-            # Drop the ticker level (usually level 1) to get flat ['Open', 'High', ...]
-            try:
-                df.columns = df.columns.get_level_values(0)
-            except Exception as e:
-                logger.warning(f"Failed to flatten MultiIndex columns: {e}")
-
+        
         # 重置索引，将日期从索引变为列
         df = df.reset_index()
         
