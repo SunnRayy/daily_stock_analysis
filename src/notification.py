@@ -19,6 +19,7 @@ import logging
 import json
 import smtplib
 import re
+import markdown2
 from datetime import datetime
 from typing import List, Dict, Any, Optional
 from email.mime.text import MIMEText
@@ -27,9 +28,14 @@ from email.header import Header
 from enum import Enum
 
 import requests
+try:
+    import discord
+    discord_available = True
+except ImportError:
+    discord_available = False
 
-from config import get_config
-from analyzer import AnalysisResult
+from src.config import get_config
+from src.analyzer import AnalysisResult
 from bot.models import BotMessage
 
 logger = logging.getLogger(__name__)
@@ -349,8 +355,8 @@ class NotificationService:
         report_lines.extend([
             "## 📊 操作建议汇总",
             "",
-            f"| 指标 | 数值 |",
-            f"|------|------|",
+            "| 指标 | 数值 |",
+            "|------|------|",
             f"| 🟢 建议买入/加仓 | **{buy_count}** 只 |",
             f"| 🟡 建议持有/观望 | **{hold_count}** 只 |",
             f"| 🔴 建议减仓/卖出 | **{sell_count}** 只 |",
@@ -473,7 +479,7 @@ class NotificationService:
             
             # 数据来源说明
             if hasattr(result, 'search_performed') and result.search_performed:
-                report_lines.append(f"*🔍 已执行联网搜索*")
+                report_lines.append("*🔍 已执行联网搜索*")
             if hasattr(result, 'data_sources') and result.data_sources:
                 report_lines.append(f"*📋 数据来源：{result.data_sources}*")
             
@@ -746,7 +752,7 @@ class NotificationService:
                     ])
                 
                 # 检查清单
-                checklist = battle.get('action_checklist', [])
+                checklist = battle.get('action_checklist', []) if battle else []
                 if checklist:
                     report_lines.extend([
                         "**✅ 检查清单**",
@@ -1175,14 +1181,24 @@ class NotificationService:
             return len(s.encode('utf-8'))
         
         # 智能分割：优先按 "---" 分隔（股票之间的分隔线）
-        # 如果没有分隔线，按 "### " 标题分割（每只股票的标题）
+        # 其次尝试各级标题分割
         if "\n---\n" in content:
             sections = content.split("\n---\n")
             separator = "\n---\n"
         elif "\n### " in content:
-            # 按 ### 分割，但保留 ### 前缀
+            # 按 ### 分割
             parts = content.split("\n### ")
             sections = [parts[0]] + [f"### {p}" for p in parts[1:]]
+            separator = "\n"
+        elif "\n## " in content:
+            # 按 ## 分割 (兼容二级标题)
+            parts = content.split("\n## ")
+            sections = [parts[0]] + [f"## {p}" for p in parts[1:]]
+            separator = "\n"
+        elif "\n**" in content:
+            # 按 ** 加粗标题分割 (兼容 AI 未输出标准 Markdown 标题的情况)
+            parts = content.split("\n**")
+            sections = [parts[0]] + [f"**{p}" for p in parts[1:]]
             separator = "\n"
         else:
             # 无法智能分割，按字符强制分割
@@ -1247,11 +1263,11 @@ class NotificationService:
                     logger.error(f"企业微信第 {i+1}/{total_chunks} 批发送失败")
             except Exception as e:
                 logger.error(f"企业微信第 {i+1}/{total_chunks} 批发送异常: {e}")
-            
+
             # 批次间隔，避免触发频率限制
             if i < total_chunks - 1:
-                time.sleep(1)
-        
+                time.sleep(2.5)  # 增加到 2.5s，避免企业微信限流
+
         return success_count == total_chunks
     
     def _send_wechat_force_chunked(self, content: str, max_bytes: int) -> bool:
@@ -1763,56 +1779,129 @@ class NotificationService:
     
     def _markdown_to_html(self, markdown_text: str) -> str:
         """
-        将 Markdown 转换为简单的 HTML
-        
-        支持：标题、加粗、列表、分隔线
+        将 Markdown 转换为 HTML，支持表格并优化排版
+
+        使用 markdown2 库进行转换，并添加优化的 CSS 样式
+        解决问题：
+        1. 邮件表格未渲染问题
+        2. 邮件内容排版过于松散问题
         """
-        html = markdown_text
-        
-        # 转义 HTML 特殊字符
-        html = html.replace('&', '&amp;')
-        html = html.replace('<', '&lt;')
-        html = html.replace('>', '&gt;')
-        
-        # 标题 (# ## ###)
-        html = re.sub(r'^### (.+)$', r'<h3>\1</h3>', html, flags=re.MULTILINE)
-        html = re.sub(r'^## (.+)$', r'<h2>\1</h2>', html, flags=re.MULTILINE)
-        html = re.sub(r'^# (.+)$', r'<h1>\1</h1>', html, flags=re.MULTILINE)
-        
-        # 加粗 **text**
-        html = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', html)
-        
-        # 斜体 *text*
-        html = re.sub(r'\*(.+?)\*', r'<em>\1</em>', html)
-        
-        # 分隔线 ---
-        html = re.sub(r'^---$', r'<hr>', html, flags=re.MULTILINE)
-        
-        # 列表项 - item
-        html = re.sub(r'^- (.+)$', r'<li>\1</li>', html, flags=re.MULTILINE)
-        
-        # 引用 > text
-        html = re.sub(r'^&gt; (.+)$', r'<blockquote>\1</blockquote>', html, flags=re.MULTILINE)
-        
-        # 换行
-        html = html.replace('\n', '<br>\n')
-        
-        # 包装 HTML
+        # 使用 markdown2 转换，开启表格和其他扩展支持
+        html_content = markdown2.markdown(
+            markdown_text,
+            extras=["tables", "fenced-code-blocks", "break-on-newline", "cuddled-lists"]
+        )
+
+        # 优化 CSS 样式：更紧凑的排版，美观的表格
+        css_style = """
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+                line-height: 1.5;
+                color: #24292e;
+                font-size: 14px;
+                padding: 15px;
+                max-width: 900px;
+                margin: 0 auto;
+            }
+            h1 {
+                font-size: 20px;
+                border-bottom: 1px solid #eaecef;
+                padding-bottom: 0.3em;
+                margin-top: 1.2em;
+                margin-bottom: 0.8em;
+                color: #0366d6;
+            }
+            h2 {
+                font-size: 18px;
+                border-bottom: 1px solid #eaecef;
+                padding-bottom: 0.3em;
+                margin-top: 1.0em;
+                margin-bottom: 0.6em;
+            }
+            h3 {
+                font-size: 16px;
+                margin-top: 0.8em;
+                margin-bottom: 0.4em;
+            }
+            p {
+                margin-top: 0;
+                margin-bottom: 8px;
+            }
+            /* 表格样式优化 */
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                margin: 12px 0;
+                display: block;
+                overflow-x: auto;
+                font-size: 13px;
+            }
+            th, td {
+                border: 1px solid #dfe2e5;
+                padding: 6px 10px;
+                text-align: left;
+            }
+            th {
+                background-color: #f6f8fa;
+                font-weight: 600;
+            }
+            tr:nth-child(2n) {
+                background-color: #f8f8f8;
+            }
+            tr:hover {
+                background-color: #f1f8ff;
+            }
+            /* 引用块样式 */
+            blockquote {
+                color: #6a737d;
+                border-left: 0.25em solid #dfe2e5;
+                padding: 0 1em;
+                margin: 0 0 10px 0;
+            }
+            /* 代码块样式 */
+            code {
+                padding: 0.2em 0.4em;
+                margin: 0;
+                font-size: 85%;
+                background-color: rgba(27,31,35,0.05);
+                border-radius: 3px;
+                font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+            }
+            pre {
+                padding: 12px;
+                overflow: auto;
+                line-height: 1.45;
+                background-color: #f6f8fa;
+                border-radius: 3px;
+                margin-bottom: 10px;
+            }
+            hr {
+                height: 0.25em;
+                padding: 0;
+                margin: 16px 0;
+                background-color: #e1e4e8;
+                border: 0;
+            }
+            ul, ol {
+                padding-left: 20px;
+                margin-bottom: 10px;
+            }
+            li {
+                margin: 2px 0;
+            }
+        """
+
         return f"""
         <!DOCTYPE html>
         <html>
         <head>
             <meta charset="utf-8">
             <style>
-                body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; padding: 20px; max-width: 800px; margin: 0 auto; }}
-                h1, h2, h3 {{ color: #333; }}
-                hr {{ border: none; border-top: 1px solid #ddd; margin: 20px 0; }}
-                blockquote {{ border-left: 4px solid #ddd; padding-left: 16px; color: #666; }}
-                li {{ margin: 4px 0; }}
+                {css_style}
             </style>
         </head>
         <body>
-            {html}
+            {html_content}
         </body>
         </html>
         """
@@ -2456,7 +2545,7 @@ class NotificationService:
                 logger.warning("飞书 SDK 不可用，无法发送 Stream 回复")
                 return False
             
-            from config import get_config
+            from src.config import get_config
             config = get_config()
             
             app_id = getattr(config, 'feishu_app_id', None)
@@ -2958,7 +3047,7 @@ if __name__ == "__main__":
     service = NotificationService()
     
     # 显示检测到的渠道
-    print(f"=== 通知渠道检测 ===")
+    print("=== 通知渠道检测 ===")
     print(f"当前渠道: {service.get_channel_names()}")
     print(f"渠道列表: {service.get_available_channels()}")
     print(f"服务可用: {service.is_available()}")

@@ -8,7 +8,7 @@
 
 > 🤖 基于 AI 大模型的 A股/港股/美股自选股智能分析系统，每日自动分析并推送「决策仪表盘」到企业微信/飞书/Telegram/邮箱
 
-[English](./README_EN.md) | 简体中文
+[English](docs/README_EN.md) | 简体中文
 
 ![运行效果演示](./sources/all_2026-01-13_221547.gif)
 
@@ -193,28 +193,23 @@
 ```
 daily_stock_analysis/
 ├── main.py              # 主程序入口
-├── analyzer.py          # AI 分析器（Gemini）
-├── market_analyzer.py   # 大盘复盘分析
-├── search_service.py    # 新闻搜索服务
-├── notification.py      # 消息推送
-├── scheduler.py         # 定时任务
-├── storage.py           # 数据存储
-├── config.py            # 配置管理
 ├── webui.py             # WebUI 入口
-├── data_provider/       # 数据源适配器
-│   ├── akshare_fetcher.py
-│   ├── tushare_fetcher.py
-│   ├── baostock_fetcher.py
-│   └── yfinance_fetcher.py
+├── src/                 # 核心业务代码
+│   ├── analyzer.py      # AI 分析器（Gemini）
+│   ├── config.py        # 配置管理
+│   ├── notification.py  # 消息推送
+│   ├── storage.py       # 数据存储
+│   └── ...
+├── bot/                 # 机器人模块
 ├── web/                 # WebUI 模块
-│   ├── server.py        # HTTP 服务器
-│   ├── router.py        # 路由管理
-│   ├── handlers.py      # 请求处理器
-│   ├── services.py      # 业务服务
-│   └── templates.py     # HTML 模板
-├── .github/workflows/   # GitHub Actions
-├── Dockerfile           # Docker 镜像
-└── docker-compose.yml   # Docker 编排
+├── data_provider/       # 数据源适配器
+├── docker/              # Docker 配置
+│   ├── Dockerfile
+│   └── docker-compose.yml
+├── docs/                # 项目文档
+│   ├── full-guide.md    # 完整配置指南
+│   └── ...
+└── .github/workflows/   # GitHub Actions
 ```
 
 ## 🗺️ Roadmap
@@ -252,14 +247,14 @@ daily_stock_analysis/
 - [x] GitHub Actions
 - [x] 港股支持
 - [x] Web 管理界面 (简易版)
-- [ ] 历史分析回测
 - [x] 美股支持 (Finnhub/Yfinance)
+- [ ] 历史分析回测
 
 ## 🤝 贡献
 
 欢迎提交 Issue 和 Pull Request！
 
-详见 [贡献指南](CONTRIBUTING.md)
+详见 [贡献指南](docs/CONTRIBUTING.md)
 
 ## 📄 License
 
