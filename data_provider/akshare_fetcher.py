@@ -1017,40 +1017,15 @@ class AkshareFetcher(BaseFetcher):
             
             row = row.iloc[0]
             
-<<<<<<< HEAD
-            # 安全获取字段值
-            def safe_float(val, default=0.0):
-                try:
-                    if pd.isna(val):
-                        return default
-                    return float(val)
-                except:
-                    return default
-            
-            quote = RealtimeQuote(
-=======
             # 使用 realtime_types.py 中的统一转换函数
             # 港股行情数据构建
             quote = UnifiedRealtimeQuote(
->>>>>>> upstream/main
                 code=stock_code,
                 name=str(row.get('名称', '')),
                 source=RealtimeSource.AKSHARE_EM,
                 price=safe_float(row.get('最新价')),
                 change_pct=safe_float(row.get('涨跌幅')),
                 change_amount=safe_float(row.get('涨跌额')),
-<<<<<<< HEAD
-                volume_ratio=safe_float(row.get('量比', 0)),
-                turnover_rate=safe_float(row.get('换手率', 0)),
-                amplitude=safe_float(row.get('振幅', 0)),
-                pe_ratio=safe_float(row.get('市盈率-动态', 0)),
-                pb_ratio=safe_float(row.get('市净率', 0)),
-                total_mv=safe_float(row.get('总市值', 0)),
-                circ_mv=safe_float(row.get('流通市值', 0)),
-                change_60d=0.0,
-                high_52w=safe_float(row.get('52周最高', 0)),
-                low_52w=safe_float(row.get('52周最低', 0)),
-=======
                 volume=safe_int(row.get('成交量')),
                 amount=safe_float(row.get('成交额')),
                 volume_ratio=safe_float(row.get('量比')),
@@ -1062,7 +1037,6 @@ class AkshareFetcher(BaseFetcher):
                 circ_mv=safe_float(row.get('流通市值')),
                 high_52w=safe_float(row.get('52周最高')),
                 low_52w=safe_float(row.get('52周最低')),
->>>>>>> upstream/main
             )
             
             logger.info(f"[港股实时行情] {stock_code} {quote.name}: 价格={quote.price}, 涨跌={quote.change_pct}%")
