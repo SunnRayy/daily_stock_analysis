@@ -116,10 +116,15 @@ class MarketAnalyzer:
         """初始化 Tushare API"""
         if self.config.tushare_token:
             try:
+                # 显式打印 Token 状态（掩码处理）
+                masked_token = self.config.tushare_token[:6] + "******" + self.config.tushare_token[-4:]
+                logger.info(f"[大盘] 初始化 Tushare API (Token: {masked_token})")
                 ts.set_token(self.config.tushare_token)
                 return ts.pro_api()
             except Exception as e:
                 logger.warning(f"[大盘] Tushare 初始化失败: {e}")
+        else:
+            logger.warning("[大盘] Tushare Token 未配置，将无法作为备用数据源！")
         return None
         
     def get_market_overview(self) -> MarketOverview:
@@ -397,7 +402,7 @@ class MarketAnalyzer:
     def _get_statistics_from_tushare(self, overview: MarketOverview):
         """从 Tushare 获取补充统计数据 (主要是成交额)"""
         if not self.config.tushare_token:
-            logger.debug("[大盘] Tushare Token 未配置，跳过补充统计数据")
+            logger.warning("[大盘] Tushare Token 未配置，无法补充统计数据")
             return
 
         try:
