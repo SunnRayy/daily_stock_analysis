@@ -389,12 +389,15 @@ class MarketAnalyzer:
                 
         except Exception as e:
             logger.error(f"[大盘] 获取涨跌统计失败: {e}")
-            # 尝试 Tushare 兜底 (获取成交额)
+        
+        # 如果成交额不足（说明Akshare获取失败），尝试 Tushare 兜底
+        if overview.total_amount <= 0:
             self._get_statistics_from_tushare(overview)
 
     def _get_statistics_from_tushare(self, overview: MarketOverview):
         """从 Tushare 获取补充统计数据 (主要是成交额)"""
         if not self.config.tushare_token:
+            logger.debug("[大盘] Tushare Token 未配置，跳过补充统计数据")
             return
 
         try:
