@@ -22,6 +22,7 @@ import yfinance as yf
 
 from src.config import get_config
 from src.search_service import SearchService
+import tushare as ts
 
 logger = logging.getLogger(__name__)
 
@@ -109,6 +110,17 @@ class MarketAnalyzer:
         self.config = get_config()
         self.search_service = search_service
         self.analyzer = analyzer
+        self.ts_api = self._init_tushare()
+
+    def _init_tushare(self):
+        """初始化 Tushare API"""
+        if self.config.tushare_token:
+            try:
+                ts.set_token(self.config.tushare_token)
+                return ts.pro_api()
+            except Exception as e:
+                logger.warning(f"[大盘] Tushare 初始化失败: {e}")
+        return None
         
     def get_market_overview(self) -> MarketOverview:
         """
@@ -185,7 +197,12 @@ class MarketAnalyzer:
                             index.amplitude = (index.high - index.low) / index.prev_close * 100
                         indices.append(index)
 
-            # 如果 akshare 获取失败或为空，尝试使用 yfinance 兜底
+            # 如果 akshare 获取失败或为空，尝试使用 Tushare 兜底
+            if not indices:
+                logger.warning("[大盘] Akshare 获取失败，尝试使用 Tushare 兜底...")
+                indices = self._get_indices_from_tushare()
+
+            # 如果 Tushare 也失败，尝试使用 yfinance 兜底
             if not indices:
                 logger.warning("[大盘] 国内源获取失败，尝试使用 Yfinance 兜底...")
                 indices = self._get_indices_from_yfinance()
@@ -196,7 +213,91 @@ class MarketAnalyzer:
             logger.error(f"[大盘] 获取指数行情失败: {e}")
             # 异常时也尝试兜底
             if not indices:
+                indices = self._get_indices_from_tushare()
+            if not indices:
                 indices = self._get_indices_from_yfinance()
+
+        return indices
+
+    def _get_indices_from_tushare(self) -> List[MarketIndex]:
+        """从 Tushare 获取指数行情 (Backup)"""
+        indices = []
+        if not self.config.tushare_token:
+            return indices
+
+        # Tushare 实时行情代码映射
+        # key: 内部代码, val: (Tushare代码, 指数名称)
+        # 使用全代码以支持所有指数 (如 sh000688)
+        ts_mapping = {
+            'sh000001': ('sh000001', '上证指数'),
+            'sz399001': ('sz399001', '深证成指'),
+            'sz399006': ('sz399006', '创业板指'),
+            'sh000688': ('sh000688', '科创50'),
+            'sh000016': ('sh000016', '上证50'),
+            'sh000300': ('sh000300', '沪深300'),
+        }
+
+        try:
+            # 批量获取
+            codes = [v[0] for k, v in ts_mapping.items() if k in self.MAIN_INDICES]
+            logger.info(f"[大盘] 调用 Tushare 实时行情: {codes}")
+            
+            df = ts.get_realtime_quotes(codes)
+            if df is not None and not df.empty:
+                for _, row in df.iterrows():
+                    code_key = row['code'] # Tushare 返回的 code 可能不带后缀
+                    
+                    # 查找对应的内部代码
+                    target_code = None
+                    target_name = ""
+                    for k, (ts_c, name) in ts_mapping.items():
+                        # get_realtime_quotes 返回的 name 有时是 '上证指数'
+                        # mapping 里的 key 是 'sh' 等
+                        # row['code'] 对 sh 是 '000001', 对 sz 是 '399001' 等
+                        # ts.get_realtime_quotes(['sh']) -> code='000001', name='上证指数'
+                        # ts.get_realtime_quotes(['cyb']) -> code='399006', name='创业板指'
+                        # 我们需要通过 ts_c 匹配输入列表中的 index 来找到 k
+                        # 或者简单点，通过名字匹配
+                        if row['name'] == name:
+                            target_code = k
+                            target_name = name
+                            break
+                    
+                    if not target_code:
+                        continue
+
+                    try:
+                        current = float(row['price'])
+                        prev_close = float(row['pre_close'])
+                        change = current - prev_close
+                        change_pct = (change / prev_close) * 100 if prev_close else 0
+                        
+                        index = MarketIndex(
+                            code=target_code,
+                            name=target_name,
+                            current=current,
+                            change=change,
+                            change_pct=change_pct,
+                            open=float(row['open']),
+                            high=float(row['high']),
+                            low=float(row['low']),
+                            prev_close=prev_close,
+                            volume=float(row['volume']), # 手
+                            amount=float(row['amount']), # 元
+                        )
+                        # 计算振幅
+                        if index.prev_close > 0:
+                            index.amplitude = (index.high - index.low) / index.prev_close * 100
+                        
+                        indices.append(index)
+                    except Exception as e:
+                        logger.warning(f"[大盘] Tushare 解析数据失败 {row.get('name')}: {e}")
+
+                if indices:
+                    logger.info(f"[大盘] Tushare 获取成功: {len(indices)} 个指数")
+
+        except Exception as e:
+            logger.error(f"[大盘] Tushare 获取指数失败: {e}")
 
         return indices
 
@@ -288,6 +389,33 @@ class MarketAnalyzer:
                 
         except Exception as e:
             logger.error(f"[大盘] 获取涨跌统计失败: {e}")
+            # 尝试 Tushare 兜底 (获取成交额)
+            self._get_statistics_from_tushare(overview)
+
+    def _get_statistics_from_tushare(self, overview: MarketOverview):
+        """从 Tushare 获取补充统计数据 (主要是成交额)"""
+        if not self.config.tushare_token:
+            return
+
+        try:
+            # 获取 上证指数 和 深证成指 的成交额作为市场总成交额的近似
+            # 000001.SH (上证总成交) + 399001.SZ (深证总成交) 
+            # 注意：ts.get_realtime_quotes(['sh', 'sz']) 返回的 amount 单位是元
+            df = ts.get_realtime_quotes(['sh', 'sz'])
+            if df is not None and not df.empty:
+                total_amount = 0.0
+                for _, row in df.iterrows():
+                    try:
+                        amount = float(row['amount'])
+                        total_amount += amount
+                    except:
+                        pass
+                
+                if total_amount > 0:
+                    overview.total_amount = total_amount / 1e8 # 转为亿元
+                    logger.info(f"[大盘] Tushare 补充成交额: {overview.total_amount:.0f}亿")
+        except Exception as e:
+            logger.warning(f"[大盘] Tushare 获取统计数据失败: {e}")
     
     def _get_sector_rankings(self, overview: MarketOverview):
         """获取板块涨跌榜"""
