@@ -305,13 +305,8 @@ class DataFetcherManager:
 
         优先级动态调整逻辑：
         - 如果配置了 TUSHARE_TOKEN：Tushare 优先级提升为 0（最高）
-        - 否则按默认优先级：
-          0. EfinanceFetcher (Priority 0) - 最高优先级
-          1. AkshareFetcher (Priority 1)
-          2. PytdxFetcher (Priority 2) - 通达信
-          2. TushareFetcher (Priority 2)
-          3. BaostockFetcher (Priority 3)
-          4. YfinanceFetcher (Priority 4)
+        - 基金模式 (fund)：优先使用 Akshare (基金) + Finnhub/Yfinance (美股)
+        - 股票模式 (stock)：使用全量数据源列表
         """
         from .efinance_fetcher import EfinanceFetcher
         from .akshare_fetcher import AkshareFetcher
@@ -319,20 +314,40 @@ class DataFetcherManager:
         from .pytdx_fetcher import PytdxFetcher
         from .baostock_fetcher import BaostockFetcher
         from .yfinance_fetcher import YfinanceFetcher
+        from .finnhub_fetcher import FinnhubFetcher
         from src.config import get_config
 
         config = get_config()
 
-        # 创建所有数据源实例（优先级在各 Fetcher 的 __init__ 中确定）
+        # 基金模式：主要使用 AkshareFetcher (基金数据) + 美股数据源
+        if getattr(config, 'default_stock_type', 'stock') == 'fund':
+            self._fetchers = [
+                FinnhubFetcher(),    # Priority 1 (US Stocks)
+                AkshareFetcher(),    # Priority 1 (Funds)
+                YfinanceFetcher(),   # Priority 4 (Fallback)
+                # Tushare 也保留作为补充，如果用户配置了Token
+                TushareFetcher(),
+            ]
+            self._fetchers.sort(key=lambda f: f.priority)
+            logger.info(f"基金模式: 启用 AkshareFetcher (基金) + Finnhub/Yfinance (美股)")
+            
+            # 过滤掉 Tushare 如果没有 Token (TushareFetcher 内部可能已经处理，但这里显式一点也好)
+            # 不过 manager 逻辑是全加进去，按 priority 排序。
+            # 如果是 fund 模式，我们确实不想用 efinance (主要针对 A 股股票)
+            return
+
+        # 股票模式：正常优先级
         efinance = EfinanceFetcher()
         akshare = AkshareFetcher()
         tushare = TushareFetcher()  # 会根据 Token 配置自动调整优先级
         pytdx = PytdxFetcher()      # 通达信数据源
         baostock = BaostockFetcher()
         yfinance = YfinanceFetcher()
+        finnhub = FinnhubFetcher()
 
         # 初始化数据源列表
         self._fetchers = [
+            finnhub,
             efinance,
             akshare,
             tushare,
