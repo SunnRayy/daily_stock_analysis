@@ -1,0 +1,760 @@
+analyze	Set up job	﻿2026-01-29T01:14:15.6276716Z Current runner version: '2.331.0'
+analyze	Set up job	2026-01-29T01:14:15.6303138Z ##[group]Runner Image Provisioner
+analyze	Set up job	2026-01-29T01:14:15.6304068Z Hosted Compute Agent
+analyze	Set up job	2026-01-29T01:14:15.6304780Z Version: 20260115.477
+analyze	Set up job	2026-01-29T01:14:15.6305523Z Commit: 4b342d620503cbe250a3154040964899ea7c9b00
+analyze	Set up job	2026-01-29T01:14:15.6306267Z Build Date: 2026-01-15T22:32:41Z
+analyze	Set up job	2026-01-29T01:14:15.6307505Z Worker ID: {6fe5f131-6cdb-4aca-95c7-acabe90b6429}
+analyze	Set up job	2026-01-29T01:14:15.6308308Z Azure Region: northcentralus
+analyze	Set up job	2026-01-29T01:14:15.6309346Z ##[endgroup]
+analyze	Set up job	2026-01-29T01:14:15.6311241Z ##[group]Operating System
+analyze	Set up job	2026-01-29T01:14:15.6311938Z Ubuntu
+analyze	Set up job	2026-01-29T01:14:15.6312631Z 24.04.3
+analyze	Set up job	2026-01-29T01:14:15.6313235Z LTS
+analyze	Set up job	2026-01-29T01:14:15.6313856Z ##[endgroup]
+analyze	Set up job	2026-01-29T01:14:15.6314491Z ##[group]Runner Image
+analyze	Set up job	2026-01-29T01:14:15.6315128Z Image: ubuntu-24.04
+analyze	Set up job	2026-01-29T01:14:15.6315848Z Version: 20260119.4.1
+analyze	Set up job	2026-01-29T01:14:15.6316953Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260119.4/images/ubuntu/Ubuntu2404-Readme.md
+analyze	Set up job	2026-01-29T01:14:15.6318797Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260119.4
+analyze	Set up job	2026-01-29T01:14:15.6320199Z ##[endgroup]
+analyze	Set up job	2026-01-29T01:14:15.6323036Z ##[group]GITHUB_TOKEN Permissions
+analyze	Set up job	2026-01-29T01:14:15.6325508Z Actions: write
+analyze	Set up job	2026-01-29T01:14:15.6326197Z ArtifactMetadata: write
+analyze	Set up job	2026-01-29T01:14:15.6326848Z Attestations: write
+analyze	Set up job	2026-01-29T01:14:15.6327593Z Checks: write
+analyze	Set up job	2026-01-29T01:14:15.6328223Z Contents: write
+analyze	Set up job	2026-01-29T01:14:15.6329126Z Deployments: write
+analyze	Set up job	2026-01-29T01:14:15.6329773Z Discussions: write
+analyze	Set up job	2026-01-29T01:14:15.6330491Z Issues: write
+analyze	Set up job	2026-01-29T01:14:15.6331094Z Metadata: read
+analyze	Set up job	2026-01-29T01:14:15.6331702Z Models: read
+analyze	Set up job	2026-01-29T01:14:15.6332344Z Packages: write
+analyze	Set up job	2026-01-29T01:14:15.6332991Z Pages: write
+analyze	Set up job	2026-01-29T01:14:15.6333745Z PullRequests: write
+analyze	Set up job	2026-01-29T01:14:15.6334404Z RepositoryProjects: write
+analyze	Set up job	2026-01-29T01:14:15.6335130Z SecurityEvents: write
+analyze	Set up job	2026-01-29T01:14:15.6335825Z Statuses: write
+analyze	Set up job	2026-01-29T01:14:15.6336456Z ##[endgroup]
+analyze	Set up job	2026-01-29T01:14:15.6339006Z Secret source: Actions
+analyze	Set up job	2026-01-29T01:14:15.6340285Z Prepare workflow directory
+analyze	Set up job	2026-01-29T01:14:15.6679914Z Prepare all required actions
+analyze	Set up job	2026-01-29T01:14:15.6719883Z Getting action download info
+analyze	Set up job	2026-01-29T01:14:15.9939948Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+analyze	Set up job	2026-01-29T01:14:16.1141201Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+analyze	Set up job	2026-01-29T01:14:16.2270201Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+analyze	Set up job	2026-01-29T01:14:16.4452107Z Complete job name: analyze
+analyze	检出代码	﻿2026-01-29T01:14:16.5177248Z ##[group]Run actions/checkout@v4
+analyze	检出代码	2026-01-29T01:14:16.5178201Z with:
+analyze	检出代码	2026-01-29T01:14:16.5178716Z   repository: SunnRayy/daily_stock_analysis
+analyze	检出代码	2026-01-29T01:14:16.5179724Z   token: ***
+analyze	检出代码	2026-01-29T01:14:16.5180202Z   ssh-strict: true
+analyze	检出代码	2026-01-29T01:14:16.5180673Z   ssh-user: git
+analyze	检出代码	2026-01-29T01:14:16.5181164Z   persist-credentials: true
+analyze	检出代码	2026-01-29T01:14:16.5181709Z   clean: true
+analyze	检出代码	2026-01-29T01:14:16.5182194Z   sparse-checkout-cone-mode: true
+analyze	检出代码	2026-01-29T01:14:16.5182752Z   fetch-depth: 1
+analyze	检出代码	2026-01-29T01:14:16.5183213Z   fetch-tags: false
+analyze	检出代码	2026-01-29T01:14:16.5183697Z   show-progress: true
+analyze	检出代码	2026-01-29T01:14:16.5184178Z   lfs: false
+analyze	检出代码	2026-01-29T01:14:16.5184628Z   submodules: false
+analyze	检出代码	2026-01-29T01:14:16.5185110Z   set-safe-directory: true
+analyze	检出代码	2026-01-29T01:14:16.5185879Z ##[endgroup]
+analyze	检出代码	2026-01-29T01:14:16.6284646Z Syncing repository: SunnRayy/daily_stock_analysis
+analyze	检出代码	2026-01-29T01:14:16.6286902Z ##[group]Getting Git version info
+analyze	检出代码	2026-01-29T01:14:16.6287807Z Working directory is '/home/runner/work/daily_stock_analysis/daily_stock_analysis'
+analyze	检出代码	2026-01-29T01:14:16.6289263Z [command]/usr/bin/git version
+analyze	检出代码	2026-01-29T01:14:16.6373221Z git version 2.52.0
+analyze	检出代码	2026-01-29T01:14:16.6400787Z ##[endgroup]
+analyze	检出代码	2026-01-29T01:14:16.6416358Z Temporarily overriding HOME='/home/runner/work/_temp/10ecbeac-8ea5-480a-bca6-8056f22258b6' before making global git config changes
+analyze	检出代码	2026-01-29T01:14:16.6418047Z Adding repository directory to the temporary git global config as a safe directory
+analyze	检出代码	2026-01-29T01:14:16.6431262Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/daily_stock_analysis/daily_stock_analysis
+analyze	检出代码	2026-01-29T01:14:16.6489984Z Deleting the contents of '/home/runner/work/daily_stock_analysis/daily_stock_analysis'
+analyze	检出代码	2026-01-29T01:14:16.6494187Z ##[group]Initializing the repository
+analyze	检出代码	2026-01-29T01:14:16.6499997Z [command]/usr/bin/git init /home/runner/work/daily_stock_analysis/daily_stock_analysis
+analyze	检出代码	2026-01-29T01:14:16.6592307Z hint: Using 'master' as the name for the initial branch. This default branch name
+analyze	检出代码	2026-01-29T01:14:16.6594142Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+analyze	检出代码	2026-01-29T01:14:16.6595886Z hint: to use in all of your new repositories, which will suppress this warning,
+analyze	检出代码	2026-01-29T01:14:16.6597194Z hint: call:
+analyze	检出代码	2026-01-29T01:14:16.6597889Z hint:
+analyze	检出代码	2026-01-29T01:14:16.6599031Z hint: 	git config --global init.defaultBranch <name>
+analyze	检出代码	2026-01-29T01:14:16.6600191Z hint:
+analyze	检出代码	2026-01-29T01:14:16.6601292Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+analyze	检出代码	2026-01-29T01:14:16.6603061Z hint: 'development'. The just-created branch can be renamed via this command:
+analyze	检出代码	2026-01-29T01:14:16.6604422Z hint:
+analyze	检出代码	2026-01-29T01:14:16.6605222Z hint: 	git branch -m <name>
+analyze	检出代码	2026-01-29T01:14:16.6606223Z hint:
+analyze	检出代码	2026-01-29T01:14:16.6607371Z hint: Disable this message with "git config set advice.defaultBranchName false"
+analyze	检出代码	2026-01-29T01:14:16.6609689Z Initialized empty Git repository in /home/runner/work/daily_stock_analysis/daily_stock_analysis/.git/
+analyze	检出代码	2026-01-29T01:14:16.6613055Z [command]/usr/bin/git remote add origin https://github.com/SunnRayy/daily_stock_analysis
+analyze	检出代码	2026-01-29T01:14:16.6649611Z ##[endgroup]
+analyze	检出代码	2026-01-29T01:14:16.6651132Z ##[group]Disabling automatic garbage collection
+analyze	检出代码	2026-01-29T01:14:16.6654282Z [command]/usr/bin/git config --local gc.auto 0
+analyze	检出代码	2026-01-29T01:14:16.6686681Z ##[endgroup]
+analyze	检出代码	2026-01-29T01:14:16.6694818Z ##[group]Setting up auth
+analyze	检出代码	2026-01-29T01:14:16.6696283Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+analyze	检出代码	2026-01-29T01:14:16.6729302Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+analyze	检出代码	2026-01-29T01:14:16.7092324Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+analyze	检出代码	2026-01-29T01:14:16.7131749Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+analyze	检出代码	2026-01-29T01:14:16.7364410Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+analyze	检出代码	2026-01-29T01:14:16.7396487Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+analyze	检出代码	2026-01-29T01:14:16.7636202Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+analyze	检出代码	2026-01-29T01:14:16.7672895Z ##[endgroup]
+analyze	检出代码	2026-01-29T01:14:16.7673867Z ##[group]Fetching the repository
+analyze	检出代码	2026-01-29T01:14:16.7683395Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +1fa84159ca9800201bbabcd2eb7f273906d241e3:refs/remotes/origin/main
+analyze	检出代码	2026-01-29T01:14:17.7203049Z From https://github.com/SunnRayy/daily_stock_analysis
+analyze	检出代码	2026-01-29T01:14:17.7205212Z  * [new ref]         1fa84159ca9800201bbabcd2eb7f273906d241e3 -> origin/main
+analyze	检出代码	2026-01-29T01:14:17.7239131Z ##[endgroup]
+analyze	检出代码	2026-01-29T01:14:17.7240800Z ##[group]Determining the checkout info
+analyze	检出代码	2026-01-29T01:14:17.7242530Z ##[endgroup]
+analyze	检出代码	2026-01-29T01:14:17.7248285Z [command]/usr/bin/git sparse-checkout disable
+analyze	检出代码	2026-01-29T01:14:17.7292434Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+analyze	检出代码	2026-01-29T01:14:17.7322930Z ##[group]Checking out the ref
+analyze	检出代码	2026-01-29T01:14:17.7326448Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+analyze	检出代码	2026-01-29T01:14:17.9274448Z Switched to a new branch 'main'
+analyze	检出代码	2026-01-29T01:14:17.9276229Z branch 'main' set up to track 'origin/main'.
+analyze	检出代码	2026-01-29T01:14:17.9298069Z ##[endgroup]
+analyze	检出代码	2026-01-29T01:14:17.9337365Z [command]/usr/bin/git log -1 --format=%H
+analyze	检出代码	2026-01-29T01:14:17.9359925Z 1fa84159ca9800201bbabcd2eb7f273906d241e3
+analyze	设置 Python 环境	﻿2026-01-29T01:14:17.9759838Z ##[group]Run actions/setup-python@v5
+analyze	设置 Python 环境	2026-01-29T01:14:17.9761258Z with:
+analyze	设置 Python 环境	2026-01-29T01:14:17.9762263Z   python-version: 3.11
+analyze	设置 Python 环境	2026-01-29T01:14:17.9763369Z   cache: pip
+analyze	设置 Python 环境	2026-01-29T01:14:17.9764392Z   check-latest: false
+analyze	设置 Python 环境	2026-01-29T01:14:17.9765857Z   token: ***
+analyze	设置 Python 环境	2026-01-29T01:14:17.9766917Z   update-environment: true
+analyze	设置 Python 环境	2026-01-29T01:14:17.9768136Z   allow-prereleases: false
+analyze	设置 Python 环境	2026-01-29T01:14:17.9769467Z   freethreaded: false
+analyze	设置 Python 环境	2026-01-29T01:14:17.9770565Z ##[endgroup]
+analyze	设置 Python 环境	2026-01-29T01:14:18.1506286Z ##[group]Installed versions
+analyze	设置 Python 环境	2026-01-29T01:14:18.1806634Z Successfully set up CPython (3.11.14)
+analyze	设置 Python 环境	2026-01-29T01:14:18.1810113Z ##[endgroup]
+analyze	设置 Python 环境	2026-01-29T01:14:18.2531216Z [command]/opt/hostedtoolcache/Python/3.11.14/x64/bin/pip cache dir
+analyze	设置 Python 环境	2026-01-29T01:14:19.7790227Z /home/runner/.cache/pip
+analyze	设置 Python 环境	2026-01-29T01:14:19.9507227Z Cache hit for: setup-python-Linux-x64-24.04-Ubuntu-python-3.11.14-pip-4f1a695a201ce38c6a8c7621c635b192e5ff90725f736c4558a7db115d37cde8
+analyze	设置 Python 环境	2026-01-29T01:14:21.0766464Z Received 134217728 of 145159207 (92.5%), 128.0 MBs/sec
+analyze	设置 Python 环境	2026-01-29T01:14:21.2143478Z Received 145159207 of 145159207 (100.0%), 121.6 MBs/sec
+analyze	设置 Python 环境	2026-01-29T01:14:21.2145070Z Cache Size: ~138 MB (145159207 B)
+analyze	设置 Python 环境	2026-01-29T01:14:21.2187171Z [command]/usr/bin/tar -xf /home/runner/work/_temp/3fa79976-1686-49f3-a86e-0a204f3ae645/cache.tzst -P -C /home/runner/work/daily_stock_analysis/daily_stock_analysis --use-compress-program unzstd
+analyze	设置 Python 环境	2026-01-29T01:14:21.4973891Z Cache restored successfully
+analyze	设置 Python 环境	2026-01-29T01:14:21.5253545Z Cache restored from key: setup-python-Linux-x64-24.04-Ubuntu-python-3.11.14-pip-4f1a695a201ce38c6a8c7621c635b192e5ff90725f736c4558a7db115d37cde8
+analyze	安装依赖	﻿2026-01-29T01:14:21.5419565Z ##[group]Run pip install --upgrade pip
+analyze	安装依赖	2026-01-29T01:14:21.5420055Z [36;1mpip install --upgrade pip[0m
+analyze	安装依赖	2026-01-29T01:14:21.5420399Z [36;1mpip install -r requirements.txt[0m
+analyze	安装依赖	2026-01-29T01:14:21.5461116Z shell: /usr/bin/bash -e {0}
+analyze	安装依赖	2026-01-29T01:14:21.5461435Z env:
+analyze	安装依赖	2026-01-29T01:14:21.5461739Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.14/x64
+analyze	安装依赖	2026-01-29T01:14:21.5462214Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib/pkgconfig
+analyze	安装依赖	2026-01-29T01:14:21.5462704Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+analyze	安装依赖	2026-01-29T01:14:21.5463131Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+analyze	安装依赖	2026-01-29T01:14:21.5463543Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+analyze	安装依赖	2026-01-29T01:14:21.5463972Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib
+analyze	安装依赖	2026-01-29T01:14:21.5464311Z ##[endgroup]
+analyze	安装依赖	2026-01-29T01:14:22.7281674Z Requirement already satisfied: pip in /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages (25.3)
+analyze	安装依赖	2026-01-29T01:14:23.7382620Z Collecting python-dotenv>=1.0.0 (from -r requirements.txt (line 6))
+analyze	安装依赖	2026-01-29T01:14:23.7400454Z   Using cached python_dotenv-1.2.1-py3-none-any.whl.metadata (25 kB)
+analyze	安装依赖	2026-01-29T01:14:23.7558332Z Collecting tenacity>=8.2.0 (from -r requirements.txt (line 7))
+analyze	安装依赖	2026-01-29T01:14:23.7574375Z   Using cached tenacity-9.1.2-py3-none-any.whl.metadata (1.2 kB)
+analyze	安装依赖	2026-01-29T01:14:24.0288737Z Collecting sqlalchemy>=2.0.0 (from -r requirements.txt (line 8))
+analyze	安装依赖	2026-01-29T01:14:24.0305559Z   Using cached sqlalchemy-2.0.46-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (9.5 kB)
+analyze	安装依赖	2026-01-29T01:14:24.0470624Z Collecting schedule>=1.2.0 (from -r requirements.txt (line 9))
+analyze	安装依赖	2026-01-29T01:14:24.0484716Z   Using cached schedule-1.2.2-py3-none-any.whl.metadata (3.8 kB)
+analyze	安装依赖	2026-01-29T01:14:24.0623310Z Collecting efinance>=0.5.5 (from -r requirements.txt (line 12))
+analyze	安装依赖	2026-01-29T01:14:24.0636276Z   Using cached efinance-0.5.5.2-py3-none-any.whl.metadata (41 kB)
+analyze	安装依赖	2026-01-29T01:14:24.1063529Z Collecting akshare>=1.12.0 (from -r requirements.txt (line 13))
+analyze	安装依赖	2026-01-29T01:14:24.1632566Z   Downloading akshare-1.18.20-py3-none-any.whl.metadata (12 kB)
+analyze	安装依赖	2026-01-29T01:14:24.2004725Z Collecting tushare>=1.4.0 (from -r requirements.txt (line 14))
+analyze	安装依赖	2026-01-29T01:14:24.2019209Z   Using cached tushare-1.4.24-py3-none-any.whl.metadata (3.4 kB)
+analyze	安装依赖	2026-01-29T01:14:24.2128257Z Collecting baostock>=0.8.0 (from -r requirements.txt (line 15))
+analyze	安装依赖	2026-01-29T01:14:24.2150635Z   Using cached baostock-0.8.9-py3-none-any.whl.metadata (3.3 kB)
+analyze	安装依赖	2026-01-29T01:14:24.2432338Z Collecting yfinance>=0.2.0 (from -r requirements.txt (line 16))
+analyze	安装依赖	2026-01-29T01:14:24.2445495Z   Using cached yfinance-1.1.0-py2.py3-none-any.whl.metadata (6.1 kB)
+analyze	安装依赖	2026-01-29T01:14:24.2617855Z Collecting finnhub-python>=2.4.0 (from -r requirements.txt (line 18))
+analyze	安装依赖	2026-01-29T01:14:24.2631576Z   Using cached finnhub_python-2.4.27-py3-none-any.whl.metadata (9.2 kB)
+analyze	安装依赖	2026-01-29T01:14:24.2864944Z Collecting lark-oapi>=1.0.0 (from -r requirements.txt (line 20))
+analyze	安装依赖	2026-01-29T01:14:24.2920051Z   Downloading lark_oapi-1.5.3-py3-none-any.whl.metadata (3.7 kB)
+analyze	安装依赖	2026-01-29T01:14:24.3982614Z Collecting pandas>=2.0.0 (from -r requirements.txt (line 23))
+analyze	安装依赖	2026-01-29T01:14:24.3998702Z   Using cached pandas-3.0.0-cp311-cp311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (79 kB)
+analyze	安装依赖	2026-01-29T01:14:24.6374852Z Collecting numpy>=1.24.0 (from -r requirements.txt (line 24))
+analyze	安装依赖	2026-01-29T01:14:24.6390286Z   Using cached numpy-2.4.1-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (6.6 kB)
+analyze	安装依赖	2026-01-29T01:14:24.6486846Z Collecting google-generativeai>=0.8.0 (from -r requirements.txt (line 27))
+analyze	安装依赖	2026-01-29T01:14:24.6500219Z   Using cached google_generativeai-0.8.6-py3-none-any.whl.metadata (3.9 kB)
+analyze	安装依赖	2026-01-29T01:14:24.7161717Z Collecting openai>=1.0.0 (from -r requirements.txt (line 28))
+analyze	安装依赖	2026-01-29T01:14:24.7195668Z   Downloading openai-2.16.0-py3-none-any.whl.metadata (29 kB)
+analyze	安装依赖	2026-01-29T01:14:24.7471929Z Collecting tavily-python>=0.3.0 (from -r requirements.txt (line 31))
+analyze	安装依赖	2026-01-29T01:14:24.7502913Z   Downloading tavily_python-0.7.20-py3-none-any.whl.metadata (9.0 kB)
+analyze	安装依赖	2026-01-29T01:14:24.7637194Z Collecting google-search-results>=2.4.0 (from -r requirements.txt (line 32))
+analyze	安装依赖	2026-01-29T01:14:24.7638623Z   Using cached google_search_results-2.4.2-py3-none-any.whl
+analyze	安装依赖	2026-01-29T01:14:24.7994569Z Collecting requests>=2.31.0 (from -r requirements.txt (line 35))
+analyze	安装依赖	2026-01-29T01:14:24.8008545Z   Using cached requests-2.32.5-py3-none-any.whl.metadata (4.9 kB)
+analyze	安装依赖	2026-01-29T01:14:24.8151368Z Collecting markdown2>=2.4.0 (from -r requirements.txt (line 36))
+analyze	安装依赖	2026-01-29T01:14:24.8164906Z   Using cached markdown2-2.5.4-py3-none-any.whl.metadata (2.1 kB)
+analyze	安装依赖	2026-01-29T01:14:24.8288597Z Collecting fake-useragent>=1.4.0 (from -r requirements.txt (line 37))
+analyze	安装依赖	2026-01-29T01:14:24.8302467Z   Using cached fake_useragent-2.2.0-py3-none-any.whl.metadata (17 kB)
+analyze	安装依赖	2026-01-29T01:14:24.8469985Z Collecting dingtalk-stream>=0.24.3 (from -r requirements.txt (line 39))
+analyze	安装依赖	2026-01-29T01:14:24.8483521Z   Using cached dingtalk_stream-0.24.3-py3-none-any.whl.metadata (5.3 kB)
+analyze	安装依赖	2026-01-29T01:14:24.8651030Z Collecting discord.py>=2.0.0 (from -r requirements.txt (line 44))
+analyze	安装依赖	2026-01-29T01:14:24.8664640Z   Using cached discord_py-2.6.4-py3-none-any.whl.metadata (7.5 kB)
+analyze	安装依赖	2026-01-29T01:14:24.8884831Z Collecting httpx[socks] (from -r requirements.txt (line 38))
+analyze	安装依赖	2026-01-29T01:14:24.8898368Z   Using cached httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+analyze	安装依赖	2026-01-29T01:14:25.0417709Z Collecting greenlet>=1 (from sqlalchemy>=2.0.0->-r requirements.txt (line 8))
+analyze	安装依赖	2026-01-29T01:14:25.0433178Z   Using cached greenlet-3.3.1-cp311-cp311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.7 kB)
+analyze	安装依赖	2026-01-29T01:14:25.0583281Z Collecting typing-extensions>=4.6.0 (from sqlalchemy>=2.0.0->-r requirements.txt (line 8))
+analyze	安装依赖	2026-01-29T01:14:25.0596877Z   Using cached typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+analyze	安装依赖	2026-01-29T01:14:25.0915496Z Collecting tqdm (from efinance>=0.5.5->-r requirements.txt (line 12))
+analyze	安装依赖	2026-01-29T01:14:25.0929554Z   Using cached tqdm-4.67.1-py3-none-any.whl.metadata (57 kB)
+analyze	安装依赖	2026-01-29T01:14:25.1051916Z Collecting retry (from efinance>=0.5.5->-r requirements.txt (line 12))
+analyze	安装依赖	2026-01-29T01:14:25.1066113Z   Using cached retry-0.9.2-py2.py3-none-any.whl.metadata (5.8 kB)
+analyze	安装依赖	2026-01-29T01:14:25.1156960Z Collecting multitasking (from efinance>=0.5.5->-r requirements.txt (line 12))
+analyze	安装依赖	2026-01-29T01:14:25.1158305Z   Using cached multitasking-0.0.12-py3-none-any.whl
+analyze	安装依赖	2026-01-29T01:14:25.1366489Z Collecting jsonpath (from efinance>=0.5.5->-r requirements.txt (line 12))
+analyze	安装依赖	2026-01-29T01:14:25.1367446Z   Using cached jsonpath-0.82.2-py3-none-any.whl
+analyze	安装依赖	2026-01-29T01:14:25.1732088Z Collecting rich (from efinance>=0.5.5->-r requirements.txt (line 12))
+analyze	安装依赖	2026-01-29T01:14:25.1746603Z   Using cached rich-14.3.1-py3-none-any.whl.metadata (18 kB)
+analyze	安装依赖	2026-01-29T01:14:25.1909401Z Collecting beautifulsoup4 (from efinance>=0.5.5->-r requirements.txt (line 12))
+analyze	安装依赖	2026-01-29T01:14:25.1923379Z   Using cached beautifulsoup4-4.14.3-py3-none-any.whl.metadata (3.8 kB)
+analyze	安装依赖	2026-01-29T01:14:25.3706235Z Collecting lxml>=4.2.1 (from akshare>=1.12.0->-r requirements.txt (line 13))
+analyze	安装依赖	2026-01-29T01:14:25.3722546Z   Using cached lxml-6.0.2-cp311-cp311-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl.metadata (3.6 kB)
+analyze	安装依赖	2026-01-29T01:14:25.4303183Z Collecting curl_cffi>=0.13.0 (from akshare>=1.12.0->-r requirements.txt (line 13))
+analyze	安装依赖	2026-01-29T01:14:25.4318332Z   Using cached curl_cffi-0.14.0-cp39-abi3-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl.metadata (15 kB)
+analyze	安装依赖	2026-01-29T01:14:25.4478444Z Collecting html5lib>=1.0.1 (from akshare>=1.12.0->-r requirements.txt (line 13))
+analyze	安装依赖	2026-01-29T01:14:25.4493127Z   Using cached html5lib-1.1-py2.py3-none-any.whl.metadata (16 kB)
+analyze	安装依赖	2026-01-29T01:14:25.4597361Z Collecting xlrd>=1.2.0 (from akshare>=1.12.0->-r requirements.txt (line 13))
+analyze	安装依赖	2026-01-29T01:14:25.4610976Z   Using cached xlrd-2.0.2-py2.py3-none-any.whl.metadata (3.5 kB)
+analyze	安装依赖	2026-01-29T01:14:25.4839093Z Collecting urllib3>=1.25.8 (from akshare>=1.12.0->-r requirements.txt (line 13))
+analyze	安装依赖	2026-01-29T01:14:25.4852835Z   Using cached urllib3-2.6.3-py3-none-any.whl.metadata (6.9 kB)
+analyze	安装依赖	2026-01-29T01:14:25.5104363Z Collecting openpyxl>=3.0.3 (from akshare>=1.12.0->-r requirements.txt (line 13))
+analyze	安装依赖	2026-01-29T01:14:25.5117842Z   Using cached openpyxl-3.1.5-py2.py3-none-any.whl.metadata (2.5 kB)
+analyze	安装依赖	2026-01-29T01:14:25.5208714Z Collecting tabulate>=0.8.6 (from akshare>=1.12.0->-r requirements.txt (line 13))
+analyze	安装依赖	2026-01-29T01:14:25.5222221Z   Using cached tabulate-0.9.0-py3-none-any.whl.metadata (34 kB)
+analyze	安装依赖	2026-01-29T01:14:25.5359104Z Collecting decorator>=4.4.2 (from akshare>=1.12.0->-r requirements.txt (line 13))
+analyze	安装依赖	2026-01-29T01:14:25.5372578Z   Using cached decorator-5.2.1-py3-none-any.whl.metadata (3.9 kB)
+analyze	安装依赖	2026-01-29T01:14:25.5599374Z Collecting py-mini-racer>=0.6.0 (from akshare>=1.12.0->-r requirements.txt (line 13))
+analyze	安装依赖	2026-01-29T01:14:25.5612843Z   Using cached py_mini_racer-0.6.0-py2.py3-none-manylinux1_x86_64.whl.metadata (8.7 kB)
+analyze	安装依赖	2026-01-29T01:14:25.5712127Z Collecting akracer>=0.0.13 (from akshare>=1.12.0->-r requirements.txt (line 13))
+analyze	安装依赖	2026-01-29T01:14:25.5724962Z   Using cached akracer-0.0.14-py3-none-any.whl.metadata (3.3 kB)
+analyze	安装依赖	2026-01-29T01:14:25.6460886Z Collecting simplejson (from tushare>=1.4.0->-r requirements.txt (line 14))
+analyze	安装依赖	2026-01-29T01:14:25.6476258Z   Using cached simplejson-3.20.2-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (3.2 kB)
+analyze	安装依赖	2026-01-29T01:14:25.6554143Z Collecting bs4 (from tushare>=1.4.0->-r requirements.txt (line 14))
+analyze	安装依赖	2026-01-29T01:14:25.6567427Z   Using cached bs4-0.0.2-py2.py3-none-any.whl.metadata (411 bytes)
+analyze	安装依赖	2026-01-29T01:14:25.7133142Z Collecting websocket-client>=0.57.0 (from tushare>=1.4.0->-r requirements.txt (line 14))
+analyze	安装依赖	2026-01-29T01:14:25.7148214Z   Using cached websocket_client-1.9.0-py3-none-any.whl.metadata (8.3 kB)
+analyze	安装依赖	2026-01-29T01:14:25.7573795Z Collecting platformdirs>=2.0.0 (from yfinance>=0.2.0->-r requirements.txt (line 16))
+analyze	安装依赖	2026-01-29T01:14:25.7587565Z   Using cached platformdirs-4.5.1-py3-none-any.whl.metadata (12 kB)
+analyze	安装依赖	2026-01-29T01:14:25.7921150Z Collecting pytz>=2022.5 (from yfinance>=0.2.0->-r requirements.txt (line 16))
+analyze	安装依赖	2026-01-29T01:14:25.7935346Z   Using cached pytz-2025.2-py2.py3-none-any.whl.metadata (22 kB)
+analyze	安装依赖	2026-01-29T01:14:25.8354295Z Collecting frozendict>=2.3.4 (from yfinance>=0.2.0->-r requirements.txt (line 16))
+analyze	安装依赖	2026-01-29T01:14:25.8369063Z   Using cached frozendict-2.4.7-py3-none-any.whl.metadata (23 kB)
+analyze	安装依赖	2026-01-29T01:14:25.8562441Z Collecting peewee>=3.16.2 (from yfinance>=0.2.0->-r requirements.txt (line 16))
+analyze	安装依赖	2026-01-29T01:14:25.8575916Z   Using cached peewee-3.19.0-py3-none-any.whl.metadata (7.0 kB)
+analyze	安装依赖	2026-01-29T01:14:25.8659161Z Collecting curl_cffi>=0.13.0 (from akshare>=1.12.0->-r requirements.txt (line 13))
+analyze	安装依赖	2026-01-29T01:14:25.8672954Z   Using cached curl_cffi-0.13.0-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (13 kB)
+analyze	安装依赖	2026-01-29T01:14:26.0236478Z Collecting protobuf>=3.19.0 (from yfinance>=0.2.0->-r requirements.txt (line 16))
+analyze	安装依赖	2026-01-29T01:14:26.0252440Z   Using cached protobuf-6.33.4-cp39-abi3-manylinux2014_x86_64.whl.metadata (593 bytes)
+analyze	安装依赖	2026-01-29T01:14:26.1087488Z Collecting websockets>=13.0 (from yfinance>=0.2.0->-r requirements.txt (line 16))
+analyze	安装依赖	2026-01-29T01:14:26.1103761Z   Using cached websockets-16.0-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (6.8 kB)
+analyze	安装依赖	2026-01-29T01:14:26.2086366Z Collecting cffi>=1.12.0 (from curl_cffi>=0.13.0->akshare>=1.12.0->-r requirements.txt (line 13))
+analyze	安装依赖	2026-01-29T01:14:26.2103177Z   Using cached cffi-2.0.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.6 kB)
+analyze	安装依赖	2026-01-29T01:14:26.2787306Z Collecting certifi>=2024.2.2 (from curl_cffi>=0.13.0->akshare>=1.12.0->-r requirements.txt (line 13))
+analyze	安装依赖	2026-01-29T01:14:26.2803345Z   Using cached certifi-2026.1.4-py3-none-any.whl.metadata (2.5 kB)
+analyze	安装依赖	2026-01-29T01:14:26.2923592Z Collecting requests-toolbelt (from lark-oapi>=1.0.0->-r requirements.txt (line 20))
+analyze	安装依赖	2026-01-29T01:14:26.2937794Z   Using cached requests_toolbelt-1.0.0-py2.py3-none-any.whl.metadata (14 kB)
+analyze	安装依赖	2026-01-29T01:14:26.3685956Z Collecting pycryptodome (from lark-oapi>=1.0.0->-r requirements.txt (line 20))
+analyze	安装依赖	2026-01-29T01:14:26.3702199Z   Using cached pycryptodome-3.23.0-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (3.4 kB)
+analyze	安装依赖	2026-01-29T01:14:26.3915121Z Collecting python-dateutil>=2.8.2 (from pandas>=2.0.0->-r requirements.txt (line 23))
+analyze	安装依赖	2026-01-29T01:14:26.3929674Z   Using cached python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+analyze	安装依赖	2026-01-29T01:14:26.4086636Z Collecting google-ai-generativelanguage==0.6.15 (from google-generativeai>=0.8.0->-r requirements.txt (line 27))
+analyze	安装依赖	2026-01-29T01:14:26.4100932Z   Using cached google_ai_generativelanguage-0.6.15-py3-none-any.whl.metadata (5.7 kB)
+analyze	安装依赖	2026-01-29T01:14:26.4425254Z Collecting google-api-core (from google-generativeai>=0.8.0->-r requirements.txt (line 27))
+analyze	安装依赖	2026-01-29T01:14:26.4439991Z   Using cached google_api_core-2.29.0-py3-none-any.whl.metadata (3.3 kB)
+analyze	安装依赖	2026-01-29T01:14:26.4978321Z Collecting google-api-python-client (from google-generativeai>=0.8.0->-r requirements.txt (line 27))
+analyze	安装依赖	2026-01-29T01:14:26.4994529Z   Using cached google_api_python_client-2.188.0-py3-none-any.whl.metadata (7.0 kB)
+analyze	安装依赖	2026-01-29T01:14:26.5344146Z Collecting google-auth>=2.15.0 (from google-generativeai>=0.8.0->-r requirements.txt (line 27))
+analyze	安装依赖	2026-01-29T01:14:26.5359667Z   Using cached google_auth-2.48.0-py3-none-any.whl.metadata (6.2 kB)
+analyze	安装依赖	2026-01-29T01:14:26.6545290Z Collecting pydantic (from google-generativeai>=0.8.0->-r requirements.txt (line 27))
+analyze	安装依赖	2026-01-29T01:14:26.6561094Z   Using cached pydantic-2.12.5-py3-none-any.whl.metadata (90 kB)
+analyze	安装依赖	2026-01-29T01:14:26.7850052Z Collecting google-auth>=2.15.0 (from google-generativeai>=0.8.0->-r requirements.txt (line 27))
+analyze	安装依赖	2026-01-29T01:14:26.7866174Z   Using cached google_auth-2.49.0.dev0-py3-none-any.whl.metadata (6.0 kB)
+analyze	安装依赖	2026-01-29T01:14:26.8068146Z Collecting proto-plus<2.0.0dev,>=1.22.3 (from google-ai-generativelanguage==0.6.15->google-generativeai>=0.8.0->-r requirements.txt (line 27))
+analyze	安装依赖	2026-01-29T01:14:26.8081197Z   Using cached proto_plus-1.27.0-py3-none-any.whl.metadata (2.2 kB)
+analyze	安装依赖	2026-01-29T01:14:26.8906300Z Collecting protobuf>=3.19.0 (from yfinance>=0.2.0->-r requirements.txt (line 16))
+analyze	安装依赖	2026-01-29T01:14:26.8923160Z   Using cached protobuf-5.29.5-cp38-abi3-manylinux2014_x86_64.whl.metadata (592 bytes)
+analyze	安装依赖	2026-01-29T01:14:26.9095751Z Collecting googleapis-common-protos<2.0.0,>=1.56.2 (from google-api-core->google-generativeai>=0.8.0->-r requirements.txt (line 27))
+analyze	安装依赖	2026-01-29T01:14:26.9108582Z   Using cached googleapis_common_protos-1.72.0-py3-none-any.whl.metadata (9.4 kB)
+analyze	安装依赖	2026-01-29T01:14:27.1205122Z Collecting charset_normalizer<4,>=2 (from requests>=2.31.0->-r requirements.txt (line 35))
+analyze	安装依赖	2026-01-29T01:14:27.1221310Z   Using cached charset_normalizer-3.4.4-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (37 kB)
+analyze	安装依赖	2026-01-29T01:14:27.1415366Z Collecting idna<4,>=2.5 (from requests>=2.31.0->-r requirements.txt (line 35))
+analyze	安装依赖	2026-01-29T01:14:27.1429446Z   Using cached idna-3.11-py3-none-any.whl.metadata (8.4 kB)
+analyze	安装依赖	2026-01-29T01:14:27.6943326Z Collecting grpcio<2.0.0,>=1.33.2 (from google-api-core[grpc]!=2.0.*,!=2.1.*,!=2.10.*,!=2.2.*,!=2.3.*,!=2.4.*,!=2.5.*,!=2.6.*,!=2.7.*,!=2.8.*,!=2.9.*,<3.0.0dev,>=1.34.1->google-ai-generativelanguage==0.6.15->google-generativeai>=0.8.0->-r requirements.txt (line 27))
+analyze	安装依赖	2026-01-29T01:14:27.6958550Z   Using cached grpcio-1.76.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (3.7 kB)
+analyze	安装依赖	2026-01-29T01:14:27.7449829Z Collecting grpcio-status<2.0.0,>=1.33.2 (from google-api-core[grpc]!=2.0.*,!=2.1.*,!=2.10.*,!=2.2.*,!=2.3.*,!=2.4.*,!=2.5.*,!=2.6.*,!=2.7.*,!=2.8.*,!=2.9.*,<3.0.0dev,>=1.34.1->google-ai-generativelanguage==0.6.15->google-generativeai>=0.8.0->-r requirements.txt (line 27))
+analyze	安装依赖	2026-01-29T01:14:27.7463543Z   Using cached grpcio_status-1.76.0-py3-none-any.whl.metadata (1.1 kB)
+analyze	安装依赖	2026-01-29T01:14:27.7777546Z Collecting pyasn1-modules>=0.2.1 (from google-auth>=2.15.0->google-generativeai>=0.8.0->-r requirements.txt (line 27))
+analyze	安装依赖	2026-01-29T01:14:27.7791544Z   Using cached pyasn1_modules-0.4.2-py3-none-any.whl.metadata (3.5 kB)
+analyze	安装依赖	2026-01-29T01:14:27.9551639Z Collecting cryptography>=38.0.3 (from google-auth>=2.15.0->google-generativeai>=0.8.0->-r requirements.txt (line 27))
+analyze	安装依赖	2026-01-29T01:14:27.9590634Z   Downloading cryptography-46.0.4-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (5.7 kB)
+analyze	安装依赖	2026-01-29T01:14:27.9977721Z INFO: pip is looking at multiple versions of grpcio-status to determine which version is compatible with other requirements. This could take a while.
+analyze	安装依赖	2026-01-29T01:14:27.9984613Z Collecting grpcio-status<2.0.0,>=1.33.2 (from google-api-core[grpc]!=2.0.*,!=2.1.*,!=2.10.*,!=2.2.*,!=2.3.*,!=2.4.*,!=2.5.*,!=2.6.*,!=2.7.*,!=2.8.*,!=2.9.*,<3.0.0dev,>=1.34.1->google-ai-generativelanguage==0.6.15->google-generativeai>=0.8.0->-r requirements.txt (line 27))
+analyze	安装依赖	2026-01-29T01:14:27.9999606Z   Using cached grpcio_status-1.75.1-py3-none-any.whl.metadata (1.1 kB)
+analyze	安装依赖	2026-01-29T01:14:28.0039157Z   Using cached grpcio_status-1.75.0-py3-none-any.whl.metadata (1.1 kB)
+analyze	安装依赖	2026-01-29T01:14:28.0077357Z   Using cached grpcio_status-1.74.0-py3-none-any.whl.metadata (1.1 kB)
+analyze	安装依赖	2026-01-29T01:14:28.0115442Z   Using cached grpcio_status-1.73.1-py3-none-any.whl.metadata (1.1 kB)
+analyze	安装依赖	2026-01-29T01:14:28.0864983Z   Using cached grpcio_status-1.73.0-py3-none-any.whl.metadata (1.1 kB)
+analyze	安装依赖	2026-01-29T01:14:28.0906407Z   Using cached grpcio_status-1.72.2-py3-none-any.whl.metadata (1.1 kB)
+analyze	安装依赖	2026-01-29T01:14:28.0945137Z   Using cached grpcio_status-1.72.1-py3-none-any.whl.metadata (1.1 kB)
+analyze	安装依赖	2026-01-29T01:14:28.0969813Z INFO: pip is still looking at multiple versions of grpcio-status to determine which version is compatible with other requirements. This could take a while.
+analyze	安装依赖	2026-01-29T01:14:28.0986150Z   Using cached grpcio_status-1.71.2-py3-none-any.whl.metadata (1.1 kB)
+analyze	安装依赖	2026-01-29T01:14:28.2107674Z Collecting anyio<5,>=3.5.0 (from openai>=1.0.0->-r requirements.txt (line 28))
+analyze	安装依赖	2026-01-29T01:14:28.2122295Z   Using cached anyio-4.12.1-py3-none-any.whl.metadata (4.3 kB)
+analyze	安装依赖	2026-01-29T01:14:28.2225053Z Collecting distro<2,>=1.7.0 (from openai>=1.0.0->-r requirements.txt (line 28))
+analyze	安装依赖	2026-01-29T01:14:28.2238556Z   Using cached distro-1.9.0-py3-none-any.whl.metadata (6.8 kB)
+analyze	安装依赖	2026-01-29T01:14:28.3754914Z Collecting jiter<1,>=0.10.0 (from openai>=1.0.0->-r requirements.txt (line 28))
+analyze	安装依赖	2026-01-29T01:14:28.3770309Z   Using cached jiter-0.12.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.2 kB)
+analyze	安装依赖	2026-01-29T01:14:28.4044578Z Collecting sniffio (from openai>=1.0.0->-r requirements.txt (line 28))
+analyze	安装依赖	2026-01-29T01:14:28.4057789Z   Using cached sniffio-1.3.1-py3-none-any.whl.metadata (3.9 kB)
+analyze	安装依赖	2026-01-29T01:14:28.4495371Z Collecting httpcore==1.* (from httpx[socks]->-r requirements.txt (line 38))
+analyze	安装依赖	2026-01-29T01:14:28.4508789Z   Using cached httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+analyze	安装依赖	2026-01-29T01:14:28.4634160Z Collecting h11>=0.16 (from httpcore==1.*->httpx[socks]->-r requirements.txt (line 38))
+analyze	安装依赖	2026-01-29T01:14:28.4647069Z   Using cached h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+analyze	安装依赖	2026-01-29T01:14:28.4757452Z Collecting annotated-types>=0.6.0 (from pydantic->google-generativeai>=0.8.0->-r requirements.txt (line 27))
+analyze	安装依赖	2026-01-29T01:14:28.4770803Z   Using cached annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
+analyze	安装依赖	2026-01-29T01:14:29.1090165Z Collecting pydantic-core==2.41.5 (from pydantic->google-generativeai>=0.8.0->-r requirements.txt (line 27))
+analyze	安装依赖	2026-01-29T01:14:29.1106326Z   Using cached pydantic_core-2.41.5-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.3 kB)
+analyze	安装依赖	2026-01-29T01:14:29.1247073Z Collecting typing-inspection>=0.4.2 (from pydantic->google-generativeai>=0.8.0->-r requirements.txt (line 27))
+analyze	安装依赖	2026-01-29T01:14:29.1260824Z   Using cached typing_inspection-0.4.2-py3-none-any.whl.metadata (2.6 kB)
+analyze	安装依赖	2026-01-29T01:14:29.2579481Z Collecting tiktoken>=0.5.1 (from tavily-python>=0.3.0->-r requirements.txt (line 31))
+analyze	安装依赖	2026-01-29T01:14:29.2596029Z   Using cached tiktoken-0.12.0-cp311-cp311-manylinux_2_28_x86_64.whl.metadata (6.7 kB)
+analyze	安装依赖	2026-01-29T01:14:29.2780246Z Collecting socksio==1.* (from httpx[socks]->-r requirements.txt (line 38))
+analyze	安装依赖	2026-01-29T01:14:29.2794566Z   Using cached socksio-1.0.0-py3-none-any.whl.metadata (6.1 kB)
+analyze	安装依赖	2026-01-29T01:14:29.7492155Z Collecting aiohttp>=3.10.0 (from dingtalk-stream>=0.24.3->-r requirements.txt (line 39))
+analyze	安装依赖	2026-01-29T01:14:29.7507963Z   Using cached aiohttp-3.13.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (8.1 kB)
+analyze	安装依赖	2026-01-29T01:14:29.7998538Z Collecting aiohappyeyeballs>=2.5.0 (from aiohttp>=3.10.0->dingtalk-stream>=0.24.3->-r requirements.txt (line 39))
+analyze	安装依赖	2026-01-29T01:14:29.8012454Z   Using cached aiohappyeyeballs-2.6.1-py3-none-any.whl.metadata (5.9 kB)
+analyze	安装依赖	2026-01-29T01:14:29.8096495Z Collecting aiosignal>=1.4.0 (from aiohttp>=3.10.0->dingtalk-stream>=0.24.3->-r requirements.txt (line 39))
+analyze	安装依赖	2026-01-29T01:14:29.8110361Z   Using cached aiosignal-1.4.0-py3-none-any.whl.metadata (3.7 kB)
+analyze	安装依赖	2026-01-29T01:14:29.8264878Z Collecting attrs>=17.3.0 (from aiohttp>=3.10.0->dingtalk-stream>=0.24.3->-r requirements.txt (line 39))
+analyze	安装依赖	2026-01-29T01:14:29.8278266Z   Using cached attrs-25.4.0-py3-none-any.whl.metadata (10 kB)
+analyze	安装依赖	2026-01-29T01:14:29.8931017Z Collecting frozenlist>=1.1.1 (from aiohttp>=3.10.0->dingtalk-stream>=0.24.3->-r requirements.txt (line 39))
+analyze	安装依赖	2026-01-29T01:14:29.8947671Z   Using cached frozenlist-1.8.0-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (20 kB)
+analyze	安装依赖	2026-01-29T01:14:30.1254158Z Collecting multidict<7.0,>=4.5 (from aiohttp>=3.10.0->dingtalk-stream>=0.24.3->-r requirements.txt (line 39))
+analyze	安装依赖	2026-01-29T01:14:30.1269931Z   Using cached multidict-6.7.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (5.3 kB)
+analyze	安装依赖	2026-01-29T01:14:30.1775161Z Collecting propcache>=0.2.0 (from aiohttp>=3.10.0->dingtalk-stream>=0.24.3->-r requirements.txt (line 39))
+analyze	安装依赖	2026-01-29T01:14:30.1790685Z   Using cached propcache-0.4.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (13 kB)
+analyze	安装依赖	2026-01-29T01:14:30.5404142Z Collecting yarl<2.0,>=1.17.0 (from aiohttp>=3.10.0->dingtalk-stream>=0.24.3->-r requirements.txt (line 39))
+analyze	安装依赖	2026-01-29T01:14:30.5420118Z   Using cached yarl-1.22.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (75 kB)
+analyze	安装依赖	2026-01-29T01:14:30.5977514Z Collecting soupsieve>=1.6.1 (from beautifulsoup4->efinance>=0.5.5->-r requirements.txt (line 12))
+analyze	安装依赖	2026-01-29T01:14:30.5991986Z   Using cached soupsieve-2.8.3-py3-none-any.whl.metadata (4.6 kB)
+analyze	安装依赖	2026-01-29T01:14:30.6157976Z Collecting pycparser (from cffi>=1.12.0->curl_cffi>=0.13.0->akshare>=1.12.0->-r requirements.txt (line 13))
+analyze	安装依赖	2026-01-29T01:14:30.6171912Z   Using cached pycparser-3.0-py3-none-any.whl.metadata (8.2 kB)
+analyze	安装依赖	2026-01-29T01:14:30.6427507Z Collecting six>=1.9 (from html5lib>=1.0.1->akshare>=1.12.0->-r requirements.txt (line 13))
+analyze	安装依赖	2026-01-29T01:14:30.6442289Z   Using cached six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+analyze	安装依赖	2026-01-29T01:14:30.6506938Z Collecting webencodings (from html5lib>=1.0.1->akshare>=1.12.0->-r requirements.txt (line 13))
+analyze	安装依赖	2026-01-29T01:14:30.6520628Z   Using cached webencodings-0.5.1-py2.py3-none-any.whl.metadata (2.1 kB)
+analyze	安装依赖	2026-01-29T01:14:30.6637563Z Collecting et-xmlfile (from openpyxl>=3.0.3->akshare>=1.12.0->-r requirements.txt (line 13))
+analyze	安装依赖	2026-01-29T01:14:30.6651173Z   Using cached et_xmlfile-2.0.0-py3-none-any.whl.metadata (2.7 kB)
+analyze	安装依赖	2026-01-29T01:14:30.6885764Z Collecting pyasn1<0.7.0,>=0.6.1 (from pyasn1-modules>=0.2.1->google-auth>=2.15.0->google-generativeai>=0.8.0->-r requirements.txt (line 27))
+analyze	安装依赖	2026-01-29T01:14:30.6899413Z   Using cached pyasn1-0.6.2-py3-none-any.whl.metadata (8.4 kB)
+analyze	安装依赖	2026-01-29T01:14:31.0414391Z Collecting regex>=2022.1.18 (from tiktoken>=0.5.1->tavily-python>=0.3.0->-r requirements.txt (line 31))
+analyze	安装依赖	2026-01-29T01:14:31.0430200Z   Using cached regex-2026.1.15-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (40 kB)
+analyze	安装依赖	2026-01-29T01:14:31.0883755Z Collecting httplib2<1.0.0,>=0.19.0 (from google-api-python-client->google-generativeai>=0.8.0->-r requirements.txt (line 27))
+analyze	安装依赖	2026-01-29T01:14:31.0897307Z   Using cached httplib2-0.31.2-py3-none-any.whl.metadata (2.2 kB)
+analyze	安装依赖	2026-01-29T01:14:31.1325515Z Collecting google-auth-httplib2<1.0.0,>=0.2.0 (from google-api-python-client->google-generativeai>=0.8.0->-r requirements.txt (line 27))
+analyze	安装依赖	2026-01-29T01:14:31.1339479Z   Using cached google_auth_httplib2-0.3.0-py3-none-any.whl.metadata (3.1 kB)
+analyze	安装依赖	2026-01-29T01:14:31.1506830Z Collecting uritemplate<5,>=3.0.1 (from google-api-python-client->google-generativeai>=0.8.0->-r requirements.txt (line 27))
+analyze	安装依赖	2026-01-29T01:14:31.1521181Z   Using cached uritemplate-4.2.0-py3-none-any.whl.metadata (2.6 kB)
+analyze	安装依赖	2026-01-29T01:14:31.1820263Z Collecting pyparsing<4,>=3.1 (from httplib2<1.0.0,>=0.19.0->google-api-python-client->google-generativeai>=0.8.0->-r requirements.txt (line 27))
+analyze	安装依赖	2026-01-29T01:14:31.1834087Z   Using cached pyparsing-3.3.2-py3-none-any.whl.metadata (5.8 kB)
+analyze	安装依赖	2026-01-29T01:14:31.2243190Z Collecting py<2.0.0,>=1.4.26 (from retry->efinance>=0.5.5->-r requirements.txt (line 12))
+analyze	安装依赖	2026-01-29T01:14:31.2256728Z   Using cached py-1.11.0-py2.py3-none-any.whl.metadata (2.8 kB)
+analyze	安装依赖	2026-01-29T01:14:31.2436279Z Collecting markdown-it-py>=2.2.0 (from rich->efinance>=0.5.5->-r requirements.txt (line 12))
+analyze	安装依赖	2026-01-29T01:14:31.2450624Z   Using cached markdown_it_py-4.0.0-py3-none-any.whl.metadata (7.3 kB)
+analyze	安装依赖	2026-01-29T01:14:31.2650378Z Collecting pygments<3.0.0,>=2.13.0 (from rich->efinance>=0.5.5->-r requirements.txt (line 12))
+analyze	安装依赖	2026-01-29T01:14:31.2663939Z   Using cached pygments-2.19.2-py3-none-any.whl.metadata (2.5 kB)
+analyze	安装依赖	2026-01-29T01:14:31.2800556Z Collecting mdurl~=0.1 (from markdown-it-py>=2.2.0->rich->efinance>=0.5.5->-r requirements.txt (line 12))
+analyze	安装依赖	2026-01-29T01:14:31.2818189Z   Using cached mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
+analyze	安装依赖	2026-01-29T01:14:31.2960617Z Using cached python_dotenv-1.2.1-py3-none-any.whl (21 kB)
+analyze	安装依赖	2026-01-29T01:14:31.2973999Z Using cached tenacity-9.1.2-py3-none-any.whl (28 kB)
+analyze	安装依赖	2026-01-29T01:14:31.2987936Z Using cached sqlalchemy-2.0.46-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (3.3 MB)
+analyze	安装依赖	2026-01-29T01:14:31.3024499Z Using cached schedule-1.2.2-py3-none-any.whl (12 kB)
+analyze	安装依赖	2026-01-29T01:14:31.3037591Z Using cached efinance-0.5.5.2-py3-none-any.whl (73 kB)
+analyze	安装依赖	2026-01-29T01:14:31.3085647Z Downloading akshare-1.18.20-py3-none-any.whl (1.1 MB)
+analyze	安装依赖	2026-01-29T01:14:31.3402390Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.1/1.1 MB 64.2 MB/s  0:00:00
+analyze	安装依赖	2026-01-29T01:14:31.3415794Z Using cached tushare-1.4.24-py3-none-any.whl (143 kB)
+analyze	安装依赖	2026-01-29T01:14:31.3429825Z Using cached baostock-0.8.9-py3-none-any.whl (45 kB)
+analyze	安装依赖	2026-01-29T01:14:31.3443356Z Using cached yfinance-1.1.0-py2.py3-none-any.whl (129 kB)
+analyze	安装依赖	2026-01-29T01:14:31.3457589Z Using cached curl_cffi-0.13.0-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (8.3 MB)
+analyze	安装依赖	2026-01-29T01:14:31.3529647Z Using cached finnhub_python-2.4.27-py3-none-any.whl (12 kB)
+analyze	安装依赖	2026-01-29T01:14:31.3570895Z Downloading lark_oapi-1.5.3-py3-none-any.whl (7.0 MB)
+analyze	安装依赖	2026-01-29T01:14:31.4022333Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.0/7.0 MB 166.1 MB/s  0:00:00
+analyze	安装依赖	2026-01-29T01:14:31.4037962Z Using cached pandas-3.0.0-cp311-cp311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (11.2 MB)
+analyze	安装依赖	2026-01-29T01:14:31.4132524Z Using cached numpy-2.4.1-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.7 MB)
+analyze	安装依赖	2026-01-29T01:14:31.4263234Z Using cached google_generativeai-0.8.6-py3-none-any.whl (155 kB)
+analyze	安装依赖	2026-01-29T01:14:31.4277194Z Using cached google_ai_generativelanguage-0.6.15-py3-none-any.whl (1.3 MB)
+analyze	安装依赖	2026-01-29T01:14:31.4299530Z Using cached google_api_core-2.29.0-py3-none-any.whl (173 kB)
+analyze	安装依赖	2026-01-29T01:14:31.4313726Z Using cached requests-2.32.5-py3-none-any.whl (64 kB)
+analyze	安装依赖	2026-01-29T01:14:31.4327864Z Using cached charset_normalizer-3.4.4-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (151 kB)
+analyze	安装依赖	2026-01-29T01:14:31.4341880Z Using cached google_auth-2.49.0.dev0-py3-none-any.whl (236 kB)
+analyze	安装依赖	2026-01-29T01:14:31.4356517Z Using cached googleapis_common_protos-1.72.0-py3-none-any.whl (297 kB)
+analyze	安装依赖	2026-01-29T01:14:31.4372043Z Using cached grpcio-1.76.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (6.6 MB)
+analyze	安装依赖	2026-01-29T01:14:31.4431288Z Using cached grpcio_status-1.71.2-py3-none-any.whl (14 kB)
+analyze	安装依赖	2026-01-29T01:14:31.4444329Z Using cached idna-3.11-py3-none-any.whl (71 kB)
+analyze	安装依赖	2026-01-29T01:14:31.4457760Z Using cached proto_plus-1.27.0-py3-none-any.whl (50 kB)
+analyze	安装依赖	2026-01-29T01:14:31.4471427Z Using cached protobuf-5.29.5-cp38-abi3-manylinux2014_x86_64.whl (319 kB)
+analyze	安装依赖	2026-01-29T01:14:31.4486606Z Using cached typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+analyze	安装依赖	2026-01-29T01:14:31.4499741Z Using cached urllib3-2.6.3-py3-none-any.whl (131 kB)
+analyze	安装依赖	2026-01-29T01:14:31.4543805Z Downloading openai-2.16.0-py3-none-any.whl (1.1 MB)
+analyze	安装依赖	2026-01-29T01:14:31.4629621Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.1/1.1 MB 129.1 MB/s  0:00:00
+analyze	安装依赖	2026-01-29T01:14:31.4643615Z Using cached anyio-4.12.1-py3-none-any.whl (113 kB)
+analyze	安装依赖	2026-01-29T01:14:31.4657431Z Using cached distro-1.9.0-py3-none-any.whl (20 kB)
+analyze	安装依赖	2026-01-29T01:14:31.4670835Z Using cached httpx-0.28.1-py3-none-any.whl (73 kB)
+analyze	安装依赖	2026-01-29T01:14:31.4684304Z Using cached httpcore-1.0.9-py3-none-any.whl (78 kB)
+analyze	安装依赖	2026-01-29T01:14:31.4698151Z Using cached jiter-0.12.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (364 kB)
+analyze	安装依赖	2026-01-29T01:14:31.4714715Z Using cached pydantic-2.12.5-py3-none-any.whl (463 kB)
+analyze	安装依赖	2026-01-29T01:14:31.4731404Z Using cached pydantic_core-2.41.5-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+analyze	安装依赖	2026-01-29T01:14:31.4779561Z Downloading tavily_python-0.7.20-py3-none-any.whl (17 kB)
+analyze	安装依赖	2026-01-29T01:14:31.4815780Z Using cached markdown2-2.5.4-py3-none-any.whl (49 kB)
+analyze	安装依赖	2026-01-29T01:14:31.4829265Z Using cached fake_useragent-2.2.0-py3-none-any.whl (161 kB)
+analyze	安装依赖	2026-01-29T01:14:31.4843357Z Using cached socksio-1.0.0-py3-none-any.whl (12 kB)
+analyze	安装依赖	2026-01-29T01:14:31.4856656Z Using cached dingtalk_stream-0.24.3-py3-none-any.whl (27 kB)
+analyze	安装依赖	2026-01-29T01:14:31.4870253Z Using cached discord_py-2.6.4-py3-none-any.whl (1.2 MB)
+analyze	安装依赖	2026-01-29T01:14:31.4892763Z Using cached aiohttp-3.13.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (1.7 MB)
+analyze	安装依赖	2026-01-29T01:14:31.4918550Z Using cached multidict-6.7.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (246 kB)
+analyze	安装依赖	2026-01-29T01:14:31.4933781Z Using cached yarl-1.22.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (365 kB)
+analyze	安装依赖	2026-01-29T01:14:31.4949370Z Using cached aiohappyeyeballs-2.6.1-py3-none-any.whl (15 kB)
+analyze	安装依赖	2026-01-29T01:14:31.4962646Z Using cached aiosignal-1.4.0-py3-none-any.whl (7.5 kB)
+analyze	安装依赖	2026-01-29T01:14:31.4975726Z Using cached akracer-0.0.14-py3-none-any.whl (10.1 MB)
+analyze	安装依赖	2026-01-29T01:14:31.5059309Z Using cached annotated_types-0.7.0-py3-none-any.whl (13 kB)
+analyze	安装依赖	2026-01-29T01:14:31.5072565Z Using cached attrs-25.4.0-py3-none-any.whl (67 kB)
+analyze	安装依赖	2026-01-29T01:14:31.5086054Z Using cached beautifulsoup4-4.14.3-py3-none-any.whl (107 kB)
+analyze	安装依赖	2026-01-29T01:14:31.5099726Z Using cached certifi-2026.1.4-py3-none-any.whl (152 kB)
+analyze	安装依赖	2026-01-29T01:14:31.5114284Z Using cached cffi-2.0.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (215 kB)
+analyze	安装依赖	2026-01-29T01:14:31.5154521Z Downloading cryptography-46.0.4-cp311-abi3-manylinux_2_34_x86_64.whl (4.5 MB)
+analyze	安装依赖	2026-01-29T01:14:31.5379109Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 220.8 MB/s  0:00:00
+analyze	安装依赖	2026-01-29T01:14:31.5393033Z Using cached decorator-5.2.1-py3-none-any.whl (9.2 kB)
+analyze	安装依赖	2026-01-29T01:14:31.5405866Z Using cached frozendict-2.4.7-py3-none-any.whl (16 kB)
+analyze	安装依赖	2026-01-29T01:14:31.5419529Z Using cached frozenlist-1.8.0-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (231 kB)
+analyze	安装依赖	2026-01-29T01:14:31.5433757Z Using cached greenlet-3.3.1-cp311-cp311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (590 kB)
+analyze	安装依赖	2026-01-29T01:14:31.5450191Z Using cached h11-0.16.0-py3-none-any.whl (37 kB)
+analyze	安装依赖	2026-01-29T01:14:31.5463336Z Using cached html5lib-1.1-py2.py3-none-any.whl (112 kB)
+analyze	安装依赖	2026-01-29T01:14:31.5477017Z Using cached lxml-6.0.2-cp311-cp311-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl (5.2 MB)
+analyze	安装依赖	2026-01-29T01:14:31.5527408Z Using cached openpyxl-3.1.5-py2.py3-none-any.whl (250 kB)
+analyze	安装依赖	2026-01-29T01:14:31.5541732Z Using cached peewee-3.19.0-py3-none-any.whl (411 kB)
+analyze	安装依赖	2026-01-29T01:14:31.5557076Z Using cached platformdirs-4.5.1-py3-none-any.whl (18 kB)
+analyze	安装依赖	2026-01-29T01:14:31.5570664Z Using cached propcache-0.4.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (210 kB)
+analyze	安装依赖	2026-01-29T01:14:31.5584723Z Using cached py_mini_racer-0.6.0-py2.py3-none-manylinux1_x86_64.whl (5.4 MB)
+analyze	安装依赖	2026-01-29T01:14:31.5635182Z Using cached pyasn1_modules-0.4.2-py3-none-any.whl (181 kB)
+analyze	安装依赖	2026-01-29T01:14:31.5648704Z Using cached pyasn1-0.6.2-py3-none-any.whl (83 kB)
+analyze	安装依赖	2026-01-29T01:14:31.5662521Z Using cached python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+analyze	安装依赖	2026-01-29T01:14:31.5676427Z Using cached pytz-2025.2-py2.py3-none-any.whl (509 kB)
+analyze	安装依赖	2026-01-29T01:14:31.5693122Z Using cached six-1.17.0-py2.py3-none-any.whl (11 kB)
+analyze	安装依赖	2026-01-29T01:14:31.5705743Z Using cached soupsieve-2.8.3-py3-none-any.whl (37 kB)
+analyze	安装依赖	2026-01-29T01:14:31.5718309Z Using cached tabulate-0.9.0-py3-none-any.whl (35 kB)
+analyze	安装依赖	2026-01-29T01:14:31.5732089Z Using cached tiktoken-0.12.0-cp311-cp311-manylinux_2_28_x86_64.whl (1.2 MB)
+analyze	安装依赖	2026-01-29T01:14:31.5753306Z Using cached regex-2026.1.15-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (800 kB)
+analyze	安装依赖	2026-01-29T01:14:31.5771009Z Using cached tqdm-4.67.1-py3-none-any.whl (78 kB)
+analyze	安装依赖	2026-01-29T01:14:31.5784118Z Using cached typing_inspection-0.4.2-py3-none-any.whl (14 kB)
+analyze	安装依赖	2026-01-29T01:14:31.5796719Z Using cached websocket_client-1.9.0-py3-none-any.whl (82 kB)
+analyze	安装依赖	2026-01-29T01:14:31.5810402Z Using cached websockets-16.0-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (184 kB)
+analyze	安装依赖	2026-01-29T01:14:31.5823630Z Using cached xlrd-2.0.2-py2.py3-none-any.whl (96 kB)
+analyze	安装依赖	2026-01-29T01:14:31.5836805Z Using cached bs4-0.0.2-py2.py3-none-any.whl (1.2 kB)
+analyze	安装依赖	2026-01-29T01:14:31.5849223Z Using cached et_xmlfile-2.0.0-py3-none-any.whl (18 kB)
+analyze	安装依赖	2026-01-29T01:14:31.5862207Z Using cached google_api_python_client-2.188.0-py3-none-any.whl (14.9 MB)
+analyze	安装依赖	2026-01-29T01:14:31.5980990Z Using cached google_auth_httplib2-0.3.0-py3-none-any.whl (9.5 kB)
+analyze	安装依赖	2026-01-29T01:14:31.5993960Z Using cached httplib2-0.31.2-py3-none-any.whl (91 kB)
+analyze	安装依赖	2026-01-29T01:14:31.6007241Z Using cached pyparsing-3.3.2-py3-none-any.whl (122 kB)
+analyze	安装依赖	2026-01-29T01:14:31.6020706Z Using cached uritemplate-4.2.0-py3-none-any.whl (11 kB)
+analyze	安装依赖	2026-01-29T01:14:31.6033262Z Using cached pycparser-3.0-py3-none-any.whl (48 kB)
+analyze	安装依赖	2026-01-29T01:14:31.6046587Z Using cached pycryptodome-3.23.0-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.3 MB)
+analyze	安装依赖	2026-01-29T01:14:31.6074807Z Using cached requests_toolbelt-1.0.0-py2.py3-none-any.whl (54 kB)
+analyze	安装依赖	2026-01-29T01:14:31.6087588Z Using cached retry-0.9.2-py2.py3-none-any.whl (8.0 kB)
+analyze	安装依赖	2026-01-29T01:14:31.6100372Z Using cached py-1.11.0-py2.py3-none-any.whl (98 kB)
+analyze	安装依赖	2026-01-29T01:14:31.6113527Z Using cached rich-14.3.1-py3-none-any.whl (309 kB)
+analyze	安装依赖	2026-01-29T01:14:31.6128100Z Using cached pygments-2.19.2-py3-none-any.whl (1.2 MB)
+analyze	安装依赖	2026-01-29T01:14:31.6149620Z Using cached markdown_it_py-4.0.0-py3-none-any.whl (87 kB)
+analyze	安装依赖	2026-01-29T01:14:31.6162725Z Using cached mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+analyze	安装依赖	2026-01-29T01:14:31.6176018Z Using cached simplejson-3.20.2-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (144 kB)
+analyze	安装依赖	2026-01-29T01:14:31.6188986Z Using cached sniffio-1.3.1-py3-none-any.whl (10 kB)
+analyze	安装依赖	2026-01-29T01:14:31.6201695Z Using cached webencodings-0.5.1-py2.py3-none-any.whl (11 kB)
+analyze	安装依赖	2026-01-29T01:14:32.0422853Z Installing collected packages: webencodings, pytz, py-mini-racer, peewee, multitasking, jsonpath, xlrd, websockets, websocket-client, urllib3, uritemplate, typing-extensions, tqdm, tenacity, tabulate, soupsieve, socksio, sniffio, six, simplejson, schedule, regex, python-dotenv, pyparsing, pygments, pycryptodome, pycparser, pyasn1, py, protobuf, propcache, platformdirs, numpy, multidict, mdurl, markdown2, lxml, jiter, idna, h11, greenlet, frozenlist, frozendict, fake-useragent, et-xmlfile, distro, decorator, charset_normalizer, certifi, attrs, annotated-types, akracer, aiohappyeyeballs, yarl, typing-inspection, sqlalchemy, retry, requests, python-dateutil, pydantic-core, pyasn1-modules, proto-plus, openpyxl, markdown-it-py, httplib2, httpcore, html5lib, grpcio, googleapis-common-protos, cffi, beautifulsoup4, anyio, aiosignal, tiktoken, rich, requests-toolbelt, pydantic, pandas, httpx, grpcio-status, google-search-results, finnhub-python, curl_cffi, cryptography, bs4, aiohttp, yfinance, tushare, tavily-python, openai, lark-oapi, google-auth, efinance, discord.py, dingtalk-stream, baostock, akshare, google-auth-httplib2, google-api-core, google-api-python-client, google-ai-generativelanguage, google-generativeai
+analyze	安装依赖	2026-01-29T01:14:53.4671054Z 
+analyze	安装依赖	2026-01-29T01:14:53.4725670Z Successfully installed aiohappyeyeballs-2.6.1 aiohttp-3.13.3 aiosignal-1.4.0 akracer-0.0.14 akshare-1.18.20 annotated-types-0.7.0 anyio-4.12.1 attrs-25.4.0 baostock-0.8.9 beautifulsoup4-4.14.3 bs4-0.0.2 certifi-2026.1.4 cffi-2.0.0 charset_normalizer-3.4.4 cryptography-46.0.4 curl_cffi-0.13.0 decorator-5.2.1 dingtalk-stream-0.24.3 discord.py-2.6.4 distro-1.9.0 efinance-0.5.5.2 et-xmlfile-2.0.0 fake-useragent-2.2.0 finnhub-python-2.4.27 frozendict-2.4.7 frozenlist-1.8.0 google-ai-generativelanguage-0.6.15 google-api-core-2.29.0 google-api-python-client-2.188.0 google-auth-2.49.0.dev0 google-auth-httplib2-0.3.0 google-generativeai-0.8.6 google-search-results-2.4.2 googleapis-common-protos-1.72.0 greenlet-3.3.1 grpcio-1.76.0 grpcio-status-1.71.2 h11-0.16.0 html5lib-1.1 httpcore-1.0.9 httplib2-0.31.2 httpx-0.28.1 idna-3.11 jiter-0.12.0 jsonpath-0.82.2 lark-oapi-1.5.3 lxml-6.0.2 markdown-it-py-4.0.0 markdown2-2.5.4 mdurl-0.1.2 multidict-6.7.1 multitasking-0.0.12 numpy-2.4.1 openai-2.16.0 openpyxl-3.1.5 pandas-3.0.0 peewee-3.19.0 platformdirs-4.5.1 propcache-0.4.1 proto-plus-1.27.0 protobuf-5.29.5 py-1.11.0 py-mini-racer-0.6.0 pyasn1-0.6.2 pyasn1-modules-0.4.2 pycparser-3.0 pycryptodome-3.23.0 pydantic-2.12.5 pydantic-core-2.41.5 pygments-2.19.2 pyparsing-3.3.2 python-dateutil-2.9.0.post0 python-dotenv-1.2.1 pytz-2025.2 regex-2026.1.15 requests-2.32.5 requests-toolbelt-1.0.0 retry-0.9.2 rich-14.3.1 schedule-1.2.2 simplejson-3.20.2 six-1.17.0 sniffio-1.3.1 socksio-1.0.0 soupsieve-2.8.3 sqlalchemy-2.0.46 tabulate-0.9.0 tavily-python-0.7.20 tenacity-9.1.2 tiktoken-0.12.0 tqdm-4.67.1 tushare-1.4.24 typing-extensions-4.15.0 typing-inspection-0.4.2 uritemplate-4.2.0 urllib3-2.6.3 webencodings-0.5.1 websocket-client-1.9.0 websockets-16.0 xlrd-2.0.2 yarl-1.22.0 yfinance-1.1.0
+analyze	创建必要目录	﻿2026-01-29T01:14:54.5686771Z ##[group]Run mkdir -p data logs reports
+analyze	创建必要目录	2026-01-29T01:14:54.5687175Z [36;1mmkdir -p data logs reports[0m
+analyze	创建必要目录	2026-01-29T01:14:54.5721385Z shell: /usr/bin/bash -e {0}
+analyze	创建必要目录	2026-01-29T01:14:54.5721664Z env:
+analyze	创建必要目录	2026-01-29T01:14:54.5740419Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.14/x64
+analyze	创建必要目录	2026-01-29T01:14:54.5740935Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib/pkgconfig
+analyze	创建必要目录	2026-01-29T01:14:54.5741415Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+analyze	创建必要目录	2026-01-29T01:14:54.5741857Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+analyze	创建必要目录	2026-01-29T01:14:54.5742282Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+analyze	创建必要目录	2026-01-29T01:14:54.5742704Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib
+analyze	创建必要目录	2026-01-29T01:14:54.5743049Z ##[endgroup]
+analyze	执行股票分析	﻿2026-01-29T01:14:54.5875500Z ##[group]Run # 判断运行模式
+analyze	执行股票分析	2026-01-29T01:14:54.5875808Z [36;1m# 判断运行模式[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5876040Z [36;1mMODE="market-only"[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5876289Z [36;1m[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5876536Z [36;1mecho "=========================================="[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5876879Z [36;1mecho "🚀 A股自选股智能分析系统"[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5877187Z [36;1mecho "=========================================="[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5877584Z [36;1mecho "⏰ 时间: $(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M:%S')"[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5877964Z [36;1mecho "🎯 运行模式: $MODE"[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5878224Z [36;1mecho "📊 自选股: $STOCK_LIST"[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5878525Z [36;1mecho "📝 报告类型: $REPORT_TYPE"[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5879000Z [36;1mecho ""[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5879302Z [36;1mecho "=========================================="[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5879632Z [36;1mecho "📋 配置检查"[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5879909Z [36;1mecho "=========================================="[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5880222Z [36;1mecho "【AI 配置】"[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5880640Z [36;1mecho "  Gemini API Key: $([ -n "$GEMINI_API_KEY" ] && echo '✅ 已配置' || echo '❌ 未配置')"[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5881199Z [36;1mecho "  OpenAI API Key: $([ -n "$OPENAI_API_KEY" ] && echo '✅ 已配置' || echo '⚪ 未配置')"[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5881603Z [36;1mecho ""[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5881824Z [36;1mecho "【搜索引擎】"[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5882178Z [36;1mecho "  Bocha API Keys: $([ -n "$BOCHA_API_KEYS" ] && echo '✅ 已配置' || echo '⚪ 未配置')"[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5882706Z [36;1mecho "  Tavily API Keys: $([ -n "$TAVILY_API_KEYS" ] && echo '✅ 已配置' || echo '⚪ 未配置')"[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5883114Z [36;1mecho ""[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5883331Z [36;1mecho "【通知渠道】"[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5883688Z [36;1mecho "  PushPlus: $([ -n "$PUSHPLUS_TOKEN" ] && echo '✅ 已配置' || echo '⚪ 未配置')"[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5884190Z [36;1mecho "  企业微信: $([ -n "$WECHAT_WEBHOOK_URL" ] && echo '✅ 已配置' || echo '⚪ 未配置')"[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5884683Z [36;1mecho "  飞书: $([ -n "$FEISHU_WEBHOOK_URL" ] && echo '✅ 已配置' || echo '⚪ 未配置')"[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5885203Z [36;1mecho "  Telegram: $([ -n "$TELEGRAM_BOT_TOKEN" ] && echo '✅ 已配置' || echo '⚪ 未配置')"[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5885726Z [36;1mecho "  Discord: $([ -n "$DISCORD_WEBHOOK_URL" ] && echo '✅ 已配置' || echo '⚪ 未配置')"[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5886170Z [36;1mecho "=========================================="[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5886473Z [36;1mecho ""[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5886683Z [36;1m[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5886874Z [36;1m# 执行分析[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5887107Z [36;1mif [ "$MODE" = "market-only" ]; then[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5887432Z [36;1m  python main.py --market-review[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5887943Z [36;1melif [ "$MODE" = "stocks-only" ]; then[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5888275Z [36;1m  python main.py --no-market-review[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5888557Z [36;1melse[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5888769Z [36;1m  python main.py[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5889247Z [36;1mfi[0m
+analyze	执行股票分析	2026-01-29T01:14:54.5921629Z shell: /usr/bin/bash -e {0}
+analyze	执行股票分析	2026-01-29T01:14:54.5921911Z env:
+analyze	执行股票分析	2026-01-29T01:14:54.5922199Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.14/x64
+analyze	执行股票分析	2026-01-29T01:14:54.5922672Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib/pkgconfig
+analyze	执行股票分析	2026-01-29T01:14:54.5923113Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+analyze	执行股票分析	2026-01-29T01:14:54.5923516Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+analyze	执行股票分析	2026-01-29T01:14:54.5923906Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+analyze	执行股票分析	2026-01-29T01:14:54.5924304Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib
+analyze	执行股票分析	2026-01-29T01:14:54.5924832Z   GEMINI_API_KEY: ***
+analyze	执行股票分析	2026-01-29T01:14:54.5925094Z   GEMINI_MODEL: gemini-2.5-flash
+analyze	执行股票分析	2026-01-29T01:14:54.5925380Z   GEMINI_MODEL_FALLBACK: gemini-2.0-flash
+analyze	执行股票分析	2026-01-29T01:14:54.5925670Z   GEMINI_REQUEST_DELAY: 3.0
+analyze	执行股票分析	2026-01-29T01:14:54.5925976Z   OPENAI_API_KEY: ***
+analyze	执行股票分析	2026-01-29T01:14:54.5926250Z   OPENAI_BASE_URL: ***
+analyze	执行股票分析	2026-01-29T01:14:54.5926509Z   OPENAI_MODEL: ***
+analyze	执行股票分析	2026-01-29T01:14:54.5926850Z   TUSHARE_TOKEN: ***
+analyze	执行股票分析	2026-01-29T01:14:54.5927274Z   BOCHA_API_KEYS: 
+analyze	执行股票分析	2026-01-29T01:14:54.5927590Z   TAVILY_API_KEYS: ***
+analyze	执行股票分析	2026-01-29T01:14:54.5927821Z   SERPAPI_API_KEYS: 
+analyze	执行股票分析	2026-01-29T01:14:54.5928047Z   WECHAT_WEBHOOK_URL: 
+analyze	执行股票分析	2026-01-29T01:14:54.5928263Z   FEISHU_WEBHOOK_URL: 
+analyze	执行股票分析	2026-01-29T01:14:54.5928503Z   TELEGRAM_BOT_TOKEN: 
+analyze	执行股票分析	2026-01-29T01:14:54.5928720Z   TELEGRAM_CHAT_ID: 
+analyze	执行股票分析	2026-01-29T01:14:54.5929222Z   EMAIL_SENDER: ***
+analyze	执行股票分析	2026-01-29T01:14:54.5929474Z   EMAIL_PASSWORD: ***
+analyze	执行股票分析	2026-01-29T01:14:54.5929733Z   EMAIL_RECEIVERS: ***
+analyze	执行股票分析	2026-01-29T01:14:54.5929968Z   PUSHOVER_USER_KEY: 
+analyze	执行股票分析	2026-01-29T01:14:54.5930193Z   PUSHOVER_API_TOKEN: 
+analyze	执行股票分析	2026-01-29T01:14:54.5930405Z   PUSHPLUS_TOKEN: 
+analyze	执行股票分析	2026-01-29T01:14:54.5930632Z   CUSTOM_WEBHOOK_URLS: 
+analyze	执行股票分析	2026-01-29T01:14:54.5930869Z   CUSTOM_WEBHOOK_BEARER_TOKEN: 
+analyze	执行股票分析	2026-01-29T01:14:54.5931126Z   DISCORD_WEBHOOK_URL: 
+analyze	执行股票分析	2026-01-29T01:14:54.5931360Z   DISCORD_BOT_TOKEN: 
+analyze	执行股票分析	2026-01-29T01:14:54.5931582Z   DISCORD_MAIN_CHANNEL_ID: 
+analyze	执行股票分析	2026-01-29T01:14:54.5931824Z   FEISHU_APP_ID: 
+analyze	执行股票分析	2026-01-29T01:14:54.5932043Z   FEISHU_APP_SECRET: 
+analyze	执行股票分析	2026-01-29T01:14:54.5932259Z   FEISHU_FOLDER_TOKEN: 
+analyze	执行股票分析	2026-01-29T01:14:54.5932625Z   STOCK_LIST: ***
+analyze	执行股票分析	2026-01-29T01:14:54.5932833Z   REPORT_TYPE: simple
+analyze	执行股票分析	2026-01-29T01:14:54.5933060Z   SINGLE_STOCK_NOTIFY: false
+analyze	执行股票分析	2026-01-29T01:14:54.5933316Z   MARKET_REVIEW_ENABLED: true
+analyze	执行股票分析	2026-01-29T01:14:54.5933555Z   ANALYSIS_DELAY: 0
+analyze	执行股票分析	2026-01-29T01:14:54.5933764Z   LOG_LEVEL: INFO
+analyze	执行股票分析	2026-01-29T01:14:54.5934083Z   MAX_WORKERS: 3
+analyze	执行股票分析	2026-01-29T01:14:54.5934437Z   ENABLE_CHIP_DISTRIBUTION: false
+analyze	执行股票分析	2026-01-29T01:14:54.5934804Z ##[endgroup]
+analyze	执行股票分析	2026-01-29T01:14:54.5985283Z ==========================================
+analyze	执行股票分析	2026-01-29T01:14:54.5985956Z 🚀 A股自选股智能分析系统
+analyze	执行股票分析	2026-01-29T01:14:54.5986213Z ==========================================
+analyze	执行股票分析	2026-01-29T01:14:54.6034957Z ⏰ 时间: 2026-01-29 09:14:54
+analyze	执行股票分析	2026-01-29T01:14:54.6035426Z 🎯 运行模式: market-only
+analyze	执行股票分析	2026-01-29T01:14:54.6035934Z 📊 自选股: ***
+analyze	执行股票分析	2026-01-29T01:14:54.6036183Z 📝 报告类型: simple
+analyze	执行股票分析	2026-01-29T01:14:54.6036313Z 
+analyze	执行股票分析	2026-01-29T01:14:54.6036417Z ==========================================
+analyze	执行股票分析	2026-01-29T01:14:54.6036737Z 📋 配置检查
+analyze	执行股票分析	2026-01-29T01:14:54.6036944Z ==========================================
+analyze	执行股票分析	2026-01-29T01:14:54.6037233Z 【AI 配置】
+analyze	执行股票分析	2026-01-29T01:14:54.6040626Z   Gemini API Key: ✅ 已配置
+analyze	执行股票分析	2026-01-29T01:14:54.6045411Z   OpenAI API Key: ✅ 已配置
+analyze	执行股票分析	2026-01-29T01:14:54.6045595Z 
+analyze	执行股票分析	2026-01-29T01:14:54.6045711Z 【搜索引擎】
+analyze	执行股票分析	2026-01-29T01:14:54.6050196Z   Bocha API Keys: ⚪ 未配置
+analyze	执行股票分析	2026-01-29T01:14:54.6054759Z   Tavily API Keys: ✅ 已配置
+analyze	执行股票分析	2026-01-29T01:14:54.6054956Z 
+analyze	执行股票分析	2026-01-29T01:14:54.6055067Z 【通知渠道】
+analyze	执行股票分析	2026-01-29T01:14:54.6059908Z   PushPlus: ⚪ 未配置
+analyze	执行股票分析	2026-01-29T01:14:54.6064335Z   企业微信: ⚪ 未配置
+analyze	执行股票分析	2026-01-29T01:14:54.6068770Z   飞书: ⚪ 未配置
+analyze	执行股票分析	2026-01-29T01:14:54.6073570Z   Telegram: ⚪ 未配置
+analyze	执行股票分析	2026-01-29T01:14:54.6078048Z   Discord: ⚪ 未配置
+analyze	执行股票分析	2026-01-29T01:14:54.6078424Z ==========================================
+analyze	执行股票分析	2026-01-29T01:14:54.6078750Z 
+analyze	执行股票分析	2026-01-29T01:14:58.5056832Z 2026-01-29 01:14:58 | INFO     | root                 | 日志系统初始化完成，日志目录: /home/runner/work/daily_stock_analysis/daily_stock_analysis/logs
+analyze	执行股票分析	2026-01-29T01:14:58.5058356Z 2026-01-29 01:14:58 | INFO     | root                 | 常规日志: logs/stock_analysis_20260129.log
+analyze	执行股票分析	2026-01-29T01:14:58.5059876Z 2026-01-29 01:14:58 | INFO     | root                 | 调试日志: logs/stock_analysis_debug_20260129.log
+analyze	执行股票分析	2026-01-29T01:14:58.5060919Z 2026-01-29 01:14:58 | INFO     | __main__             | ============================================================
+analyze	执行股票分析	2026-01-29T01:14:58.5062056Z 2026-01-29 01:14:58 | INFO     | __main__             | A股自选股智能分析系统 启动
+analyze	执行股票分析	2026-01-29T01:14:58.5063044Z 2026-01-29 01:14:58 | INFO     | __main__             | 运行时间: 2026-01-29 01:14:58
+analyze	执行股票分析	2026-01-29T01:14:58.5063971Z 2026-01-29 01:14:58 | INFO     | __main__             | ============================================================
+analyze	执行股票分析	2026-01-29T01:14:58.5065008Z 2026-01-29 01:14:58 | INFO     | __main__             | 模式: 仅大盘复盘
+analyze	执行股票分析	2026-01-29T01:14:58.5066442Z 2026-01-29 01:14:58 | INFO     | src.notification     | 已配置 1 个通知渠道：邮件
+analyze	执行股票分析	2026-01-29T01:14:58.5067801Z 2026-01-29 01:14:58 | INFO     | src.search_service   | 已配置 Tavily 搜索，共 1 个 API Key
+analyze	执行股票分析	2026-01-29T01:14:59.1340490Z /home/runner/work/daily_stock_analysis/daily_stock_analysis/src/analyzer.py:521: FutureWarning: 
+analyze	执行股票分析	2026-01-29T01:14:59.1341376Z 
+analyze	执行股票分析	2026-01-29T01:14:59.1341968Z All support for the `google.generativeai` package has ended. It will no longer be receiving 
+analyze	执行股票分析	2026-01-29T01:14:59.1343185Z updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+analyze	执行股票分析	2026-01-29T01:14:59.1344126Z See README for more details:
+analyze	执行股票分析	2026-01-29T01:14:59.1344502Z 
+analyze	执行股票分析	2026-01-29T01:14:59.1345117Z https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+analyze	执行股票分析	2026-01-29T01:14:59.1345830Z 
+analyze	执行股票分析	2026-01-29T01:14:59.1345993Z   import google.generativeai as genai
+analyze	执行股票分析	2026-01-29T01:14:59.1346958Z 2026-01-29 01:14:59 | INFO     | src.analyzer         | Gemini 模型初始化成功 (模型: gemini-2.5-flash)
+analyze	执行股票分析	2026-01-29T01:14:59.1347745Z 2026-01-29 01:14:59 | INFO     | src.core.market_review | 开始执行大盘复盘分析...
+analyze	执行股票分析	2026-01-29T01:14:59.1373600Z 2026-01-29 01:14:59 | INFO     | src.market_analyzer  | ========== 开始大盘复盘分析 ==========
+analyze	执行股票分析	2026-01-29T01:14:59.1374859Z 2026-01-29 01:14:59 | INFO     | src.market_analyzer  | [大盘] 获取主要指数实时行情...
+analyze	执行股票分析	2026-01-29T01:15:01.7705564Z 
+analyze	执行股票分析	2026-01-29T01:15:02.5837600Z   0%|          | 0/8 [00:00<?, ?it/s]
+analyze	执行股票分析	2026-01-29T01:15:03.7675529Z  12%|█▎        | 1/8 [00:00<00:05,  1.23it/s]
+analyze	执行股票分析	2026-01-29T01:15:04.3154612Z  25%|██▌       | 2/8 [00:01<00:06,  1.03s/it]
+analyze	执行股票分析	2026-01-29T01:15:05.0738598Z  38%|███▊      | 3/8 [00:02<00:04,  1.23it/s]
+analyze	执行股票分析	2026-01-29T01:15:05.8421119Z  50%|█████     | 4/8 [00:03<00:03,  1.27it/s]
+analyze	执行股票分析	2026-01-29T01:15:06.3850427Z  62%|██████▎   | 5/8 [00:04<00:02,  1.28it/s]
+analyze	执行股票分析	2026-01-29T01:15:06.9396336Z  75%|███████▌  | 6/8 [00:04<00:01,  1.43it/s]
+analyze	执行股票分析	2026-01-29T01:15:07.4103919Z  88%|████████▊ | 7/8 [00:05<00:00,  1.53it/s]
+analyze	执行股票分析	2026-01-29T01:15:07.4104483Z 100%|██████████| 8/8 [00:05<00:00,  1.68it/s]
+analyze	执行股票分析	2026-01-29T01:15:07.4205233Z 2026-01-29 01:15:07 | INFO     | src.market_analyzer  | [大盘] 获取到 6 个指数行情
+analyze	执行股票分析	2026-01-29T01:15:07.4206529Z 2026-01-29 01:15:07 | INFO     | src.market_analyzer  | [大盘] 获取市场涨跌统计...
+analyze	执行股票分析	2026-01-29T01:15:14.6684120Z 2026-01-29 01:15:14 | WARNING  | src.market_analyzer  | [大盘] A股实时行情 获取失败 (attempt 1/2): ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+analyze	执行股票分析	2026-01-29T01:15:24.0394662Z 2026-01-29 01:15:24 | WARNING  | src.market_analyzer  | [大盘] A股实时行情 获取失败 (attempt 2/2): ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+analyze	执行股票分析	2026-01-29T01:15:24.0396876Z 2026-01-29 01:15:24 | ERROR    | src.market_analyzer  | [大盘] A股实时行情 最终失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+analyze	执行股票分析	2026-01-29T01:15:24.9069969Z 2026-01-29 01:15:24 | INFO     | src.market_analyzer  | [大盘] 获取板块涨跌榜...
+analyze	执行股票分析	2026-01-29T01:16:01.8338130Z 2026-01-29 01:16:01 | WARNING  | src.market_analyzer  | [大盘] 行业板块行情 获取失败 (attempt 1/2): HTTPSConnectionPool(host='17.push2.eastmoney.com', port=443): Max retries exceeded with url: /api/qt/clist/get?pn=1&pz=100&po=1&np=1&ut=bd1d9ddb04089700cf9c27f6f7426281&fltt=2&invt=2&fid=f3&fs=m%3A90+t%3A2+f%3A%2150&fields=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6%2Cf7%2Cf8%2Cf9%2Cf10%2Cf12%2Cf13%2Cf14%2Cf15%2Cf16%2Cf17%2Cf18%2Cf20%2Cf21%2Cf23%2Cf24%2Cf25%2Cf26%2Cf22%2Cf33%2Cf11%2Cf62%2Cf128%2Cf136%2Cf115%2Cf152%2Cf124%2Cf107%2Cf104%2Cf105%2Cf140%2Cf141%2Cf207%2Cf208%2Cf209%2Cf222 (Caused by NewConnectionError("HTTPSConnection(host='17.push2.eastmoney.com', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))
+analyze	执行股票分析	2026-01-29T01:16:40.2414337Z 2026-01-29 01:16:40 | WARNING  | src.market_analyzer  | [大盘] 行业板块行情 获取失败 (attempt 2/2): HTTPSConnectionPool(host='17.push2.eastmoney.com', port=443): Max retries exceeded with url: /api/qt/clist/get?pn=1&pz=100&po=1&np=1&ut=bd1d9ddb04089700cf9c27f6f7426281&fltt=2&invt=2&fid=f3&fs=m%3A90+t%3A2+f%3A%2150&fields=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6%2Cf7%2Cf8%2Cf9%2Cf10%2Cf12%2Cf13%2Cf14%2Cf15%2Cf16%2Cf17%2Cf18%2Cf20%2Cf21%2Cf23%2Cf24%2Cf25%2Cf26%2Cf22%2Cf33%2Cf11%2Cf62%2Cf128%2Cf136%2Cf115%2Cf152%2Cf124%2Cf107%2Cf104%2Cf105%2Cf140%2Cf141%2Cf207%2Cf208%2Cf209%2Cf222 (Caused by NewConnectionError("HTTPSConnection(host='17.push2.eastmoney.com', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))
+analyze	执行股票分析	2026-01-29T01:16:40.2422208Z 2026-01-29 01:16:40 | ERROR    | src.market_analyzer  | [大盘] 行业板块行情 最终失败: HTTPSConnectionPool(host='17.push2.eastmoney.com', port=443): Max retries exceeded with url: /api/qt/clist/get?pn=1&pz=100&po=1&np=1&ut=bd1d9ddb04089700cf9c27f6f7426281&fltt=2&invt=2&fid=f3&fs=m%3A90+t%3A2+f%3A%2150&fields=f1%2Cf2%2Cf3%2Cf4%2Cf5%2Cf6%2Cf7%2Cf8%2Cf9%2Cf10%2Cf12%2Cf13%2Cf14%2Cf15%2Cf16%2Cf17%2Cf18%2Cf20%2Cf21%2Cf23%2Cf24%2Cf25%2Cf26%2Cf22%2Cf33%2Cf11%2Cf62%2Cf128%2Cf136%2Cf115%2Cf152%2Cf124%2Cf107%2Cf104%2Cf105%2Cf140%2Cf141%2Cf207%2Cf208%2Cf209%2Cf222 (Caused by NewConnectionError("HTTPSConnection(host='17.push2.eastmoney.com', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))
+analyze	执行股票分析	2026-01-29T01:16:40.2425813Z 2026-01-29 01:16:40 | INFO     | src.market_analyzer  | [大盘] 开始搜索市场新闻...
+analyze	执行股票分析	2026-01-29T01:16:40.2426533Z 2026-01-29 01:16:40 | INFO     | src.search_service   | 搜索股票新闻: 大盘(market)
+analyze	执行股票分析	2026-01-29T01:16:40.3807478Z 2026-01-29 01:16:40 | INFO     | src.search_service   | [Tavily] 搜索完成，query='大盘 market 股票 最新消息', 返回 3 条结果
+analyze	执行股票分析	2026-01-29T01:16:40.3819281Z 2026-01-29 01:16:40 | INFO     | src.search_service   | [Tavily] 搜索 '大盘 market 股票 最新消息' 成功，返回 3 条结果，耗时 0.14s
+analyze	执行股票分析	2026-01-29T01:16:40.3820139Z 2026-01-29 01:16:40 | INFO     | src.search_service   | 使用 Tavily 搜索成功
+analyze	执行股票分析	2026-01-29T01:16:40.3821594Z 2026-01-29 01:16:40 | INFO     | src.market_analyzer  | [大盘] 搜索 'A股 大盘 复盘 2026年1月' 获取 3 条结果
+analyze	执行股票分析	2026-01-29T01:16:40.3822714Z 2026-01-29 01:16:40 | INFO     | src.search_service   | 搜索股票新闻: 大盘(market)
+analyze	执行股票分析	2026-01-29T01:16:40.5907058Z 2026-01-29 01:16:40 | INFO     | src.search_service   | [Tavily] 搜索完成，query='大盘 market 股票 最新消息', 返回 3 条结果
+analyze	执行股票分析	2026-01-29T01:16:40.5918588Z 2026-01-29 01:16:40 | INFO     | src.search_service   | [Tavily] 搜索 '大盘 market 股票 最新消息' 成功，返回 3 条结果，耗时 0.21s
+analyze	执行股票分析	2026-01-29T01:16:40.5920268Z 2026-01-29 01:16:40 | INFO     | src.search_service   | 使用 Tavily 搜索成功
+analyze	执行股票分析	2026-01-29T01:16:40.5921584Z 2026-01-29 01:16:40 | INFO     | src.market_analyzer  | [大盘] 搜索 '股市 行情 分析 今日 2026年1月' 获取 3 条结果
+analyze	执行股票分析	2026-01-29T01:16:40.5922638Z 2026-01-29 01:16:40 | INFO     | src.search_service   | 搜索股票新闻: 大盘(market)
+analyze	执行股票分析	2026-01-29T01:16:40.6846828Z 2026-01-29 01:16:40 | INFO     | src.search_service   | [Tavily] 搜索完成，query='大盘 market 股票 最新消息', 返回 3 条结果
+analyze	执行股票分析	2026-01-29T01:16:40.6857962Z 2026-01-29 01:16:40 | INFO     | src.search_service   | [Tavily] 搜索 '大盘 market 股票 最新消息' 成功，返回 3 条结果，耗时 0.09s
+analyze	执行股票分析	2026-01-29T01:16:40.6859378Z 2026-01-29 01:16:40 | INFO     | src.search_service   | 使用 Tavily 搜索成功
+analyze	执行股票分析	2026-01-29T01:16:40.6860590Z 2026-01-29 01:16:40 | INFO     | src.market_analyzer  | [大盘] 搜索 'A股 市场 热点 板块 2026年1月' 获取 3 条结果
+analyze	执行股票分析	2026-01-29T01:16:40.6861677Z 2026-01-29 01:16:40 | INFO     | src.market_analyzer  | [大盘] 共获取 9 条市场新闻
+analyze	执行股票分析	2026-01-29T01:16:40.6862644Z 2026-01-29 01:16:40 | INFO     | src.market_analyzer  | [大盘] 调用大模型生成复盘报告...
+analyze	执行股票分析	2026-01-29T01:16:49.6247798Z 2026-01-29 01:16:49 | INFO     | src.market_analyzer  | [大盘] 复盘报告生成成功，长度: 621 字符
+analyze	执行股票分析	2026-01-29T01:16:49.6249637Z 2026-01-29 01:16:49 | INFO     | src.market_analyzer  | ========== 大盘复盘分析完成 ==========
+analyze	执行股票分析	2026-01-29T01:16:49.6252914Z 2026-01-29 01:16:49 | INFO     | src.notification     | 日报已保存到: /home/runner/work/daily_stock_analysis/daily_stock_analysis/reports/market_review_20260129.md
+analyze	执行股票分析	2026-01-29T01:16:49.6255095Z 2026-01-29 01:16:49 | INFO     | src.core.market_review | 大盘复盘报告已保存: /home/runner/work/daily_stock_analysis/daily_stock_analysis/reports/market_review_20260129.md
+analyze	执行股票分析	2026-01-29T01:16:49.6256615Z 2026-01-29 01:16:49 | INFO     | src.notification     | 正在向 1 个渠道发送通知：邮件
+analyze	执行股票分析	2026-01-29T01:16:49.6309320Z 2026-01-29 01:16:49 | INFO     | src.notification     | 自动识别邮箱类型: gmail.com -> smtp.gmail.com:587
+analyze	执行股票分析	2026-01-29T01:16:50.8971230Z 2026-01-29 01:16:50 | INFO     | src.notification     | 邮件发送成功，收件人: ['***']
+analyze	执行股票分析	2026-01-29T01:16:50.8972720Z 2026-01-29 01:16:50 | INFO     | src.notification     | 通知发送完成：成功 1 个，失败 0 个
+analyze	执行股票分析	2026-01-29T01:16:50.8973896Z 2026-01-29 01:16:50 | INFO     | src.core.market_review | 大盘复盘推送成功
+analyze	执行股票分析	2026-01-29T01:16:53.4349180Z                                              
+analyze	上传分析报告	﻿2026-01-29T01:16:53.4413290Z ##[group]Run actions/upload-artifact@v4
+analyze	上传分析报告	2026-01-29T01:16:53.4413601Z with:
+analyze	上传分析报告	2026-01-29T01:16:53.4413822Z   name: analysis-reports-11
+analyze	上传分析报告	2026-01-29T01:16:53.4414075Z   path: reports/
+analyze	上传分析报告	logs/
+analyze	上传分析报告	
+analyze	上传分析报告	2026-01-29T01:16:53.4414309Z   retention-days: 30
+analyze	上传分析报告	2026-01-29T01:16:53.4414543Z   if-no-files-found: warn
+analyze	上传分析报告	2026-01-29T01:16:53.4414790Z   compression-level: 6
+analyze	上传分析报告	2026-01-29T01:16:53.4415015Z   overwrite: false
+analyze	上传分析报告	2026-01-29T01:16:53.4415241Z   include-hidden-files: false
+analyze	上传分析报告	2026-01-29T01:16:53.4415479Z env:
+analyze	上传分析报告	2026-01-29T01:16:53.4415768Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.14/x64
+analyze	上传分析报告	2026-01-29T01:16:53.4416223Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib/pkgconfig
+analyze	上传分析报告	2026-01-29T01:16:53.4416672Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+analyze	上传分析报告	2026-01-29T01:16:53.4417072Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+analyze	上传分析报告	2026-01-29T01:16:53.4417457Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+analyze	上传分析报告	2026-01-29T01:16:53.4417852Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib
+analyze	上传分析报告	2026-01-29T01:16:53.4418207Z ##[endgroup]
+analyze	上传分析报告	2026-01-29T01:16:53.6621147Z Multiple search paths detected. Calculating the least common ancestor of all paths
+analyze	上传分析报告	2026-01-29T01:16:53.6625505Z The least common ancestor is /home/runner/work/daily_stock_analysis/daily_stock_analysis. This will be the root directory of the artifact
+analyze	上传分析报告	2026-01-29T01:16:53.6626676Z With the provided path, there will be 3 files uploaded
+analyze	上传分析报告	2026-01-29T01:16:53.6632682Z Artifact name is valid!
+analyze	上传分析报告	2026-01-29T01:16:53.6634294Z Root directory input is valid!
+analyze	上传分析报告	2026-01-29T01:16:53.8163796Z Beginning upload of artifact content to blob storage
+analyze	上传分析报告	2026-01-29T01:16:53.9288616Z Uploaded bytes 10453
+analyze	上传分析报告	2026-01-29T01:16:53.9581384Z Finished uploading artifact content to blob storage!
+analyze	上传分析报告	2026-01-29T01:16:53.9585470Z SHA256 digest of uploaded artifact zip is 3e9e7f3745b5873b278097a6c00c9c1e212702c11aaf2a71a6ea255ddb1934d0
+analyze	上传分析报告	2026-01-29T01:16:53.9587468Z Finalizing artifact upload
+analyze	上传分析报告	2026-01-29T01:16:54.0666431Z Artifact analysis-reports-11.zip successfully finalized. Artifact ID 5297095541
+analyze	上传分析报告	2026-01-29T01:16:54.0669608Z Artifact analysis-reports-11 has been successfully uploaded! Final size is 10453 bytes. Artifact ID is 5297095541
+analyze	上传分析报告	2026-01-29T01:16:54.0676714Z Artifact download URL: https://github.com/SunnRayy/daily_stock_analysis/actions/runs/21461778142/artifacts/5297095541
+analyze	显示运行结果	﻿2026-01-29T01:16:54.0802976Z ##[group]Run echo ""
+analyze	显示运行结果	2026-01-29T01:16:54.0803287Z [36;1mecho ""[0m
+analyze	显示运行结果	2026-01-29T01:16:54.0803561Z [36;1mecho "=========================================="[0m
+analyze	显示运行结果	2026-01-29T01:16:54.0803915Z [36;1mecho "📊 分析完成"[0m
+analyze	显示运行结果	2026-01-29T01:16:54.0804203Z [36;1mecho "=========================================="[0m
+analyze	显示运行结果	2026-01-29T01:16:54.0804618Z [36;1mif [ -d "reports" ] && [ "$(ls -A reports 2>/dev/null)" ]; then[0m
+analyze	显示运行结果	2026-01-29T01:16:54.0804992Z [36;1m  echo "生成的报告:"[0m
+analyze	显示运行结果	2026-01-29T01:16:54.0805241Z [36;1m  ls -la reports/[0m
+analyze	显示运行结果	2026-01-29T01:16:54.0805484Z [36;1melse[0m
+analyze	显示运行结果	2026-01-29T01:16:54.0805702Z [36;1m  echo "⚠️ 未生成报告文件"[0m
+analyze	显示运行结果	2026-01-29T01:16:54.0805951Z [36;1mfi[0m
+analyze	显示运行结果	2026-01-29T01:16:54.0806146Z [36;1mecho ""[0m
+analyze	显示运行结果	2026-01-29T01:16:54.0806440Z [36;1mif [ -f "logs/stock_analysis_$(date +%Y%m%d).log" ]; then[0m
+analyze	显示运行结果	2026-01-29T01:16:54.0806811Z [36;1m  echo "📜 最近日志（最后 30 行）:"[0m
+analyze	显示运行结果	2026-01-29T01:16:54.0807170Z [36;1m  tail -30 logs/stock_analysis_*.log 2>/dev/null || echo "无日志"[0m
+analyze	显示运行结果	2026-01-29T01:16:54.0807523Z [36;1mfi[0m
+analyze	显示运行结果	2026-01-29T01:16:54.0840206Z shell: /usr/bin/bash -e {0}
+analyze	显示运行结果	2026-01-29T01:16:54.0840488Z env:
+analyze	显示运行结果	2026-01-29T01:16:54.0840778Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.14/x64
+analyze	显示运行结果	2026-01-29T01:16:54.0841258Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib/pkgconfig
+analyze	显示运行结果	2026-01-29T01:16:54.0841709Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+analyze	显示运行结果	2026-01-29T01:16:54.0842113Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+analyze	显示运行结果	2026-01-29T01:16:54.0842525Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+analyze	显示运行结果	2026-01-29T01:16:54.0842933Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib
+analyze	显示运行结果	2026-01-29T01:16:54.0843270Z ##[endgroup]
+analyze	显示运行结果	2026-01-29T01:16:54.0897740Z 
+analyze	显示运行结果	2026-01-29T01:16:54.0909196Z ==========================================
+analyze	显示运行结果	2026-01-29T01:16:54.0910023Z 📊 分析完成
+analyze	显示运行结果	2026-01-29T01:16:54.0910396Z ==========================================
+analyze	显示运行结果	2026-01-29T01:16:54.0919121Z 生成的报告:
+analyze	显示运行结果	2026-01-29T01:16:54.0931602Z total 12
+analyze	显示运行结果	2026-01-29T01:16:54.0932036Z drwxr-xr-x  2 runner runner 4096 Jan 29 01:16 .
+analyze	显示运行结果	2026-01-29T01:16:54.0932686Z drwxr-xr-x 15 runner runner 4096 Jan 29 01:14 ..
+analyze	显示运行结果	2026-01-29T01:16:54.0933423Z -rw-r--r--  1 runner runner 1675 Jan 29 01:16 market_review_20260129.md
+analyze	显示运行结果	2026-01-29T01:16:54.0933965Z 
+analyze	显示运行结果	2026-01-29T01:16:54.0946440Z 📜 最近日志（最后 30 行）:
+analyze	显示运行结果	2026-01-29T01:16:54.0957812Z 无日志
+analyze	Post 设置 Python 环境	﻿2026-01-29T01:16:54.1007701Z Post job cleanup.
+analyze	Post 设置 Python 环境	2026-01-29T01:16:54.2513734Z Cache hit occurred on the primary key setup-python-Linux-x64-24.04-Ubuntu-python-3.11.14-pip-4f1a695a201ce38c6a8c7621c635b192e5ff90725f736c4558a7db115d37cde8, not saving cache.
+analyze	Post 检出代码	﻿2026-01-29T01:16:54.2636894Z Post job cleanup.
+analyze	Post 检出代码	2026-01-29T01:16:54.3666700Z [command]/usr/bin/git version
+analyze	Post 检出代码	2026-01-29T01:16:54.3708461Z git version 2.52.0
+analyze	Post 检出代码	2026-01-29T01:16:54.3753976Z Temporarily overriding HOME='/home/runner/work/_temp/5708159b-e055-45cf-9ef1-5c502c0b90c6' before making global git config changes
+analyze	Post 检出代码	2026-01-29T01:16:54.3755742Z Adding repository directory to the temporary git global config as a safe directory
+analyze	Post 检出代码	2026-01-29T01:16:54.3761104Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/daily_stock_analysis/daily_stock_analysis
+analyze	Post 检出代码	2026-01-29T01:16:54.3801092Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+analyze	Post 检出代码	2026-01-29T01:16:54.3836267Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+analyze	Post 检出代码	2026-01-29T01:16:54.4092496Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+analyze	Post 检出代码	2026-01-29T01:16:54.4115185Z http.https://github.com/.extraheader
+analyze	Post 检出代码	2026-01-29T01:16:54.4128687Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+analyze	Post 检出代码	2026-01-29T01:16:54.4160401Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+analyze	Post 检出代码	2026-01-29T01:16:54.4384090Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+analyze	Post 检出代码	2026-01-29T01:16:54.4416272Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+analyze	Complete job	﻿2026-01-29T01:16:54.4746779Z Cleaning up orphan processes

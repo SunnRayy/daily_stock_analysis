@@ -33,7 +33,42 @@ else
     exit 1
 fi
 
+# Step 3.5: Local Verification (Prevent CI failures)
+echo "Running local verification..."
+# Check for Python syntax errors
+if ! python -m py_compile src/config.py src/analyzer.py data_provider/*.py; then
+   echo "❌ Validation Failed: Syntax errors detected."
+   exit 1
+fi
+
+# Check for crucial imports (smoke test)
+if ! python -c "from src.config import get_config; from data_provider import DataFetcherManager; print('Imports OK')"; then
+   echo "❌ Validation Failed: Import verification failed."
+   exit 1
+fi
+echo "✅ Local verification passed."
+
 # Step 4: Push the updated code to your personal GitHub repository
 git push origin main
 echo "Sync complete! Your repository is now up to date."
+
+# Step 5: Check GitHub Action Status (Conditional)
+echo "Checking GitHub Action status..."
+REMOTE_URL=$(git remote get-url origin 2>/dev/null || echo "")
+TARGET_REPO="SunnRayy/daily_stock_analysis"
+
+if [[ "$REMOTE_URL" == *"$TARGET_REPO"* ]]; then
+    if command -v gh &> /dev/null; then
+        echo "Configuring gh for $TARGET_REPO..."
+        gh repo set-default "$TARGET_REPO"
+        
+        echo "Recent Workflow Runs:"
+        gh run list --limit 3
+    else
+        echo "⚠️  gh CLI not installed. Skipping automated status check."
+        echo "Please check status manually: https://github.com/$TARGET_REPO/actions"
+    fi
+else
+    echo "Current repo remote ($REMOTE_URL) does not match $TARGET_REPO. Skipping gh status check."
+fi
 ```
