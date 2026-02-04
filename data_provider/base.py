@@ -103,6 +103,7 @@ class BaseFetcher(ABC):
             List[Dict]: 指数列表，每个元素为字典，包含:
                 - code: 指数代码
                 - name: 指数名称
+                - date: 数据日期 (YYYY-MM-DD)
                 - current: 当前点位
                 - change: 涨跌点数
                 - change_pct: 涨跌幅(%)
@@ -117,6 +118,7 @@ class BaseFetcher(ABC):
 
         Returns:
             Dict: 包含:
+                - date: 数据日期 (YYYY-MM-DD or YYYYMMDD)
                 - up_count: 上涨家数
                 - down_count: 下跌家数
                 - flat_count: 平盘家数

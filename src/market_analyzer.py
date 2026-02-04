@@ -30,6 +30,7 @@ class MarketIndex:
     """大盘指数数据"""
     code: str                    # 指数代码
     name: str                    # 指数名称
+    date: str = ""               # 数据日期
     current: float = 0.0         # 当前点位
     change: float = 0.0          # 涨跌点数
     change_pct: float = 0.0      # 涨跌幅(%)
@@ -45,6 +46,7 @@ class MarketIndex:
         return {
             'code': self.code,
             'name': self.name,
+            'date': self.date,
             'current': self.current,
             'change': self.change,
             'change_pct': self.change_pct,
@@ -61,6 +63,7 @@ class MarketIndex:
 class MarketOverview:
     """市场概览数据"""
     date: str                           # 日期
+    stats_date: str = ""                # 统计数据日期
     indices: List[MarketIndex] = field(default_factory=list)  # 主要指数
     up_count: int = 0                   # 上涨家数
     down_count: int = 0                 # 下跌家数
@@ -141,6 +144,7 @@ class MarketAnalyzer:
                     index = MarketIndex(
                         code=item['code'],
                         name=item['name'],
+                        date=item.get('date', ''),
                         current=item['current'],
                         change=item['change'],
                         change_pct=item['change_pct'],
@@ -158,6 +162,13 @@ class MarketAnalyzer:
                 logger.warning("[大盘] 所有行情数据源失败，将依赖新闻搜索进行分析")
             else:
                 logger.info(f"[大盘] 获取到 {len(indices)} 个指数行情")
+                
+                # Check for stale data
+                today_str = datetime.now().strftime('%Y-%m-%d')
+                stale_indices = [idx for idx in indices if idx.date and idx.date != today_str]
+                if stale_indices:
+                     logger.warning(f"[大盘] 发现过期行情数据: {[f'{i.name}({i.date})' for i in stale_indices]}")
+                     # Trigger warning prompt logic (implemented in prompt builder)
 
         except Exception as e:
             logger.error(f"[大盘] 获取指数行情失败: {e}")
@@ -178,6 +189,7 @@ class MarketAnalyzer:
                 overview.limit_up_count = stats.get('limit_up_count', 0)
                 overview.limit_down_count = stats.get('limit_down_count', 0)
                 overview.total_amount = stats.get('total_amount', 0.0)
+                overview.stats_date = stats.get('date', '')
 
                 logger.info(f"[大盘] 涨:{overview.up_count} 跌:{overview.down_count} 平:{overview.flat_count} "
                           f"涨停:{overview.limit_up_count} 跌停:{overview.limit_down_count} "
@@ -323,7 +335,16 @@ class MarketAnalyzer:
         indices_text = ""
         for idx in overview.indices:
             direction = "↑" if idx.change_pct > 0 else "↓" if idx.change_pct < 0 else "-"
-            indices_text += f"- {idx.name}: {idx.current:.2f} ({direction}{abs(idx.change_pct):.2f}%)\n"
+            date_info = f" [{idx.date}]" if idx.date and idx.date != overview.date else ""
+            indices_text += f"- {idx.name}: {idx.current:.2f} ({direction}{abs(idx.change_pct):.2f}%){date_info}\n"
+        
+        
+        # Check if any index is stale OR stats are stale
+        is_index_stale = any(idx.date and idx.date != overview.date for idx in overview.indices)
+        is_stats_stale = (overview.stats_date and overview.stats_date != overview.date)
+        
+        is_stale = is_index_stale or is_stats_stale
+        stale_warning = "【严重警告】行情数据日期与今日不符，可能是历史数据或休市日数据。请务必在报告开头醒目提示：**当前展示的可能为过期数据**，并根据新闻判断今日实际走势。" if is_stale else ""
         
         # 板块信息
         top_sectors_text = ", ".join([f"{s['name']}({s['change_pct']:+.2f}%)" for s in overview.top_sectors[:3]])
@@ -371,6 +392,7 @@ class MarketAnalyzer:
 ## 市场新闻
 {news_text if news_text else "暂无相关新闻"}
 
+{stale_warning}
 {"注意：由于行情数据获取失败，请主要根据【市场新闻】进行定性分析和总结，不要编造具体的指数点位。" if not indices_text else ""}
 
 ---

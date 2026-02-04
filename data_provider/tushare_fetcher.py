@@ -567,6 +567,7 @@ class TushareFetcher(BaseFetcher):
                         results.append({
                             'code': ts_code.split('.')[0], # 兼容 sh000001 格式需转换，这里保持纯数字
                             'name': name,
+                            'date': pd.to_datetime(row['trade_date']).strftime('%Y-%m-%d'), # 添加日期
                             'current': current,
                             'change': safe_float(row['change']),
                             'change_pct': safe_float(row['pct_chg']),
@@ -648,6 +649,7 @@ class TushareFetcher(BaseFetcher):
                 total_amount = df['amount'].sum() * 1000 / 1e8 # 千元 -> 元 -> 亿元
 
                 return {
+                    'date': pd.to_datetime(last_date).strftime('%Y-%m-%d'),
                     'up_count': up_count,
                     'down_count': down_count,
                     'flat_count': flat_count,

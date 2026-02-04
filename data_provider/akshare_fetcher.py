@@ -1491,6 +1491,7 @@ class AkshareFetcher(BaseFetcher):
                         results.append({
                             'code': code,
                             'name': name,
+                            'date': str(row.get('日期', '')),  # 添加日期字段 (e.g., '2025-05-12')
                             'current': current,
                             'change': safe_float(row.get('涨跌额', 0)),
                             'change_pct': safe_float(row.get('涨跌幅', 0)),
@@ -1527,6 +1528,7 @@ class AkshareFetcher(BaseFetcher):
                     df[change_col] = pd.to_numeric(df[change_col], errors='coerce')
 
                     stats = {
+                        'date': datetime.now().strftime('%Y-%m-%d'),
                         'up_count': len(df[df[change_col] > 0]),
                         'down_count': len(df[df[change_col] < 0]),
                         'flat_count': len(df[df[change_col] == 0]),
