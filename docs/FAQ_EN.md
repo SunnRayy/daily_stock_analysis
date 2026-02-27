@@ -185,6 +185,7 @@ PROXY_PORT=10809
 OPENAI_API_KEY=sk-xxxxxxxx
 OPENAI_BASE_URL=https://api.deepseek.com/v1
 OPENAI_MODEL=deepseek-chat
+# Thinking mode: deepseek-reasoner, deepseek-r1, qwq auto-detected; deepseek-chat enabled by model name
 ```
 
 Supported model services:
@@ -210,10 +211,10 @@ Supported model services:
 
 ---
 
-### Q14: WebUI inaccessible in Docker?
+### Q14: API service inaccessible in Docker?
 
 **Solution**:
-1. Ensure `WEBUI_HOST=0.0.0.0` (cannot be 127.0.0.1)
+1. Ensure startup command includes `--host 0.0.0.0` (cannot be 127.0.0.1)
 2. Check port mapping is correct:
    ```yaml
    ports:
