@@ -396,11 +396,28 @@ class LLMToolAdapter:
                     openai_tc.append(tc_dict)
                 openai_msg = {
                     "role": "assistant",
-                    "content": msg.get("content"),
+                    "content": msg.get("content") or "",
                     "tool_calls": openai_tc,
+                }
+                
+                # DeepSeek requires reasoning_content to be present in assistant messages containing tool_calls.
+                if msg.get("reasoning_content") is not None:
+                    openai_msg["reasoning_content"] = msg["reasoning_content"]
+                elif _model_matches(config.openai_model or "gpt-4o-mini", _AUTO_THINKING_MODELS + list(_OPT_IN_THINKING_MODELS.keys())):
+                    # Explicitly provide an empty reasoning_content if it's missing for a thinking model
+                    openai_msg["reasoning_content"] = ""
+                    
+                openai_messages.append(openai_msg)
+            elif msg["role"] == "assistant":
+                openai_msg = {
+                    "role": "assistant",
+                    "content": msg.get("content") or "",
                 }
                 if msg.get("reasoning_content") is not None:
                     openai_msg["reasoning_content"] = msg["reasoning_content"]
+                elif _model_matches(config.openai_model or "gpt-4o-mini", _AUTO_THINKING_MODELS + list(_OPT_IN_THINKING_MODELS.keys())):
+                    openai_msg["reasoning_content"] = ""
+                    
                 openai_messages.append(openai_msg)
             else:
                 openai_messages.append({
